@@ -23,13 +23,13 @@ function shuffle(array) {
 };
 
 // Shuffle the list of cards
-let shuffledCards = shuffle(cards); 
+cards = shuffle(cards); 
 
 // Loop through each card and create its HTML
 const cardsList = document.createDocumentFragment(); 
 
-for (let i = 0; i < shuffledCards.length; i++) {
-    cardsList.appendChild(shuffledCards[i]);
+for (let i = 0; i < cards.length; i++) {
+    cardsList.appendChild(cards[i]);
 };
 
 /*
