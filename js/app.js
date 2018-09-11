@@ -43,6 +43,10 @@ for (let i = 0; i < cards.length; i++) {
 const cardDeck = document.querySelector('.deck');
 cardDeck.appendChild(cardsList);
 
+// Reset game when restart button is clicked
+const restartGame = document.querySelector('.restart');
+restartGame.addEventListener('click', function() { window.location.reload();})
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
