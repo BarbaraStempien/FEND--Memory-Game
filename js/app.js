@@ -158,9 +158,21 @@ function matchCards(selectedCards) {
             flipCards(selectedCards[1]);
             openCards = [];
         } ,1000);
+        loseLive();
     }
 }
 
+// Remove star for not matching cards
+function loseLive() {
+    stars--;
+    let starsList = Array.prototype.slice.call(document.querySelectorAll('.fa-star'));
+    for (let i = starsList.length -1; i >= 0; i--) {
+        if (!starsList[i].classList.contains('lost')) {
+            starsList[i].classList.toggle('lost');
+            break;
+        }
+    }
+}
 
 // Cards interactivity
 cardsContainer.addEventListener('click', function(e) {
