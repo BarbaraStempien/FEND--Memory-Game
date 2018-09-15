@@ -1,11 +1,23 @@
 
 //  Create a list that holds all cards
-let cards = Array.prototype.slice.call(document.getElementsByClassName('card'));
-
-/*
- * Array.from is not supported in Internet Exploter
- * let cards = Array.from(document.getElementsByClassName('card'));
- */
+let cardsImages = [
+    'fa-anchor',
+    'fa-anchor',
+    'fa-bicycle',
+    'fa-bicycle',
+    'fa-bolt',
+    'fa-bolt',
+    'fa-bomb',
+    'fa-bomb',
+    'fa-cube',
+    'fa-cube',
+    'fa-gem',
+    'fa-gem',
+    'fa-leaf',
+    'fa-leaf',
+    'fa-paper-plane',
+    'fa-paper-plane'
+];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -22,26 +34,25 @@ function shuffle(array) {
     return array;
 };
 
-// Shuffle the list of cards
-cards = shuffle(cards);
 
-// Loop through each card and create its HTML
-const cardsList = document.createDocumentFragment();
+// Generate Cards
+// Some inspiration from https://www.youtube.com/watch?v=_rUH-sEs68Y
+let cards = 16;
+const cardsContainer = document.querySelector('.deck');
 
-for (let i = 0; i < cards.length; i++) {
-    cardsList.appendChild(cards[i]);
-};
+function cardsTemplate(img) {
+    return `<li class="card"><i class="fa ${img}"></i></li>`;
+}
 
-/*
- * for...of loop is not supported in Internet Exploter
- * for (let card of shuffledCards) {
- *     cardsList.appendChild(card);
- *  }
- */
+function generateCards(cards) {
+    cardsImages = shuffle(cardsImages);
+    let cardsHTML = cardsImages.slice(0, cards).map(function(img) {
+        return cardsTemplate(img);
+    });
 
-// Add card's HTML to the page
-const cardDeck = document.querySelector('.deck');
-cardDeck.appendChild(cardsList);
+    cardsContainer.innerHTML = cardsHTML.join('');
+}
+
 
 // Reset game when restart button is clicked
 const restartGame = document.querySelector('.restart');
@@ -87,3 +98,10 @@ setInterval(setTime, 1000);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ // Initiate the game
+function startGame(){
+    generateCards(cards);
+}
+
+startGame()
