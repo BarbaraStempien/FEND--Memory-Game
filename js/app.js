@@ -199,6 +199,33 @@ function loseLive() {
     }
 }
 
+
+// Give Hints
+// Random card selection logic from https://stackoverflow.com/a/4550514
+function giveHint() {
+    if (hints >= 1) {
+        let unmatchedCards = Array.prototype.slice.call(document.querySelectorAll('li.card:not(.match)'));
+        let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
+        flipCards(randomCard);
+        setTimeout( function(){
+            flipCards(randomCard);
+        }, 1000);
+        removeHint();
+    }
+}
+
+function removeHint() {
+    hints--;
+    let hintsList = Array.prototype.slice.call(document.querySelectorAll('.fa-lightbulb'));
+    for (let i = hintsList.length -1; i >= 0; i--) {
+        if (!hintsList[i].classList.contains('used')) {
+            hintsList[i].classList.toggle('used');
+            break;
+        }
+    }
+}
+
+
 // Cards interactivity
 cardsContainer.addEventListener('click', function(e) {
     const clickTarget = event.target;
@@ -214,6 +241,12 @@ cardsContainer.addEventListener('click', function(e) {
                 addMove();
             }
     }
+});
+
+
+// Hint interactivity
+hintsContainer.addEventListener('click', function() {
+    giveHint();
 });
 
 

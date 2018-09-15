@@ -91,16 +91,30 @@ h1 {
     margin-bottom: 10px;
 }
 
-.score-panel .stars {
+.score-panel .stars,
+.score-panel .hints {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    color: #ffbf00;
 }
 
-.score-panel .stars li {
+.score-panel .stars li,
+.score-panel .hints li {
     list-style: none;
     display: inline-block;
+    padding: 2px;
+}
+
+.score-panel .stars li i,
+.score-panel .hints li i {
+    width: 18px;
+    text-align: center;
+}
+
+.score-panel .hints li {
+    cursor: pointer;
 }
 
 .score-panel .restart {
@@ -112,4 +126,9 @@ h1 {
     float: right;
     display: inline-block;
     margin: 0 5px 0 0;
+}
+
+.lost,
+.used {
+    color: #808080;
 }
