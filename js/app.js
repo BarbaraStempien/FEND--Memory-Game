@@ -74,16 +74,12 @@ function generateHints(hints) {
 }
 
 
-// Reset game when restart button is clicked
-const restartGame = document.querySelector('.restart');
-restartGame.addEventListener('click', function() { window.location.reload();})
-
-// Add timer
-// Some inspiration taken from https://stackoverflow.com/q/20618355
+// Add Timer
+// Some inspiration from https://stackoverflow.com/q/20618355
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
-const timerHTML = document.querySelector('.time');
+const timerContainer = document.querySelector('.time');
 
 function padTime(timeUnit) {
     if (timeUnit < 10) {
@@ -102,11 +98,22 @@ function setTime() {
             hours++;
         }
     }
-    timerHTML.textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
+    timerContainer.textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
 }
 
-setInterval(setTime, 1000);
+let timer = null; 
+function startTime() {
+    timer = setInterval(setTime, 1000);
+}
 
+function stopTime() {
+    clearInterval(timer);
+}
+
+
+// Reset game when restart button is clicked
+const restartGame = document.querySelector('.restart');
+restartGame.addEventListener('click', function() { window.location.reload();})
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -124,6 +131,7 @@ function startGame(){
     generateCards(cards);
     generateStars(stars);
     generateHints(hints);
+    startTime();
 }
 
 startGame()
