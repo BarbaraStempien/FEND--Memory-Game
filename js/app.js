@@ -144,12 +144,38 @@ function flipCards(card) {
     card.classList.toggle('show');
 }
 
+
+// Check if Cards Match
+let openCards = [];
+function matchCards(selectedCards) {
+    if (selectedCards[0].firstElementChild.className === selectedCards[1].firstElementChild.className) {
+        selectedCards[0].classList.toggle('match');
+        selectedCards[1].classList.toggle('match');
+        openCards = [];
+    } else {
+        setTimeout( function(){
+            flipCards(selectedCards[0]);
+            flipCards(selectedCards[1]);
+            openCards = [];
+        } ,1000);
+    }
+}
+
+
 // Cards interactivity
 cardsContainer.addEventListener('click', function(e) {
     const clickTarget = event.target;
-    if (clickTarget.classList.contains('card'))
-    {
-        flipCards(clickTarget);
+    if (clickTarget.classList.contains('card') &&
+        !clickTarget.classList.contains('match') &&
+        (openCards.length < 2) && 
+        !includes(openCards, clickTarget)
+    ) {
+            flipCards(clickTarget);
+            openCards.push(clickTarget);
+            if (openCards.length === 2) {
+                matchCards(openCards);
+                addMove();
+            }
     }
 });
 
