@@ -63,6 +63,16 @@ function generateStars(stars) {
     starsContainer.innerHTML = starsHTML;
 }
 
+// Generate Hints
+let hints = 3;
+const hintsContainer =  document.querySelector('.hints');
+const hintsTemplate = '<li><i class="fa fa-lightbulb"></i></li>';
+
+function generateHints(hints) {
+    let hintsHTML = hintsTemplate.repeat(hints);
+    hintsContainer.innerHTML = hintsHTML;
+}
+
 
 // Reset game when restart button is clicked
 const restartGame = document.querySelector('.restart');
@@ -113,6 +123,7 @@ setInterval(setTime, 1000);
 function startGame(){
     generateCards(cards);
     generateStars(stars);
+    generateHints(hints);
 }
 
 startGame()
