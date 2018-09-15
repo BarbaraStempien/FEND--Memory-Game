@@ -167,6 +167,7 @@ function matchCards(selectedCards) {
 
 
 // Add Star for matching cards n times in a row
+let pairs = cards / 2;
 let matched = 0;
 let matchedRow = 0;
 let minMatch = 3;
@@ -185,6 +186,10 @@ function gainLive() {
         };
         matchedRow = 0;
     }
+    if (pairs === matched) {
+        // TODO: Game won
+        console.log('Game won');
+    }
 }
 
 
@@ -198,6 +203,10 @@ function loseLive() {
             starsList[i].classList.toggle('lost');
             break;
         }
+    }
+    if (stars === 0) {
+        // TODO: Game over
+        console.log('Game over');
     }
 }
 
