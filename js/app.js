@@ -250,9 +250,22 @@ hintsContainer.addEventListener('click', function() {
 });
 
 
-  // Reset game when restart button is clicked
-const restartGame = document.querySelector('.restart');
-restartGame.addEventListener('click', function() { window.location.reload();})
+// Reset game
+const restartContainer = document.querySelector('.restart');
+restartContainer.addEventListener('click', function() {
+    cards = 16;
+    stars = 5;
+    hints = 3;
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    moves = 0;
+    matched = 0;
+    matchedRow = 0;
+    minMatch = 3;
+    stopTime();
+    startGame();
+})
 
 /*
  * set up the event listener for a card. If a card is clicked:
