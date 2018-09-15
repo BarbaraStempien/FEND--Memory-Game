@@ -132,3 +132,90 @@ h1 {
 .used {
     color: #808080;
 }
+
+/*
+ * Styles for the Modal Panel
+ */
+
+@-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.88);
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.hide {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 40px;
+    max-width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.modal-x {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.modal-stats {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}

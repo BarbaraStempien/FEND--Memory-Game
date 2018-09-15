@@ -205,8 +205,9 @@ function loseLive() {
         }
     }
     if (stars === 0) {
-        // TODO: Game over
-        console.log('Game over');
+        stopTime()
+        finalStats()
+        toggleModal();
     }
 }
 
@@ -248,8 +249,8 @@ cardsContainer.addEventListener('click', function (e) {
         flipCards(clickTarget);
         openCards.push(clickTarget);
         if (openCards.length === 2) {
-            matchCards(openCards);
             addMove();
+            matchCards(openCards);
         }
     }
 });
@@ -261,9 +262,40 @@ hintsContainer.addEventListener('click', function () {
 });
 
 
-// Reset game
+// Show game won / over modal
+function toggleModal() {
+    const modal = document.querySelector('.modal');
+    modal.classList.toggle('hide');
+    document.body.classList.toggle('modal-open');   
+}
+
+
+function finalStats() {
+    document.querySelector('.final-stars').innerHTML = stars;
+    document.querySelector('.final-moves').innerHTML = moves;
+    document.querySelector('.final-time').textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
+    document.querySelector('.final-hints').innerHTML = hints;
+    document.querySelector('.final-matched').innerHTML = matched;
+}
+
+
+// Close modal
+document.querySelectorAll('.close').forEach(function (element) {
+    element.addEventListener('click', function() {
+        toggleModal();
+        resetGame();
+    });
+});
+
+// Restart button interactivity
 const restartContainer = document.querySelector('.restart');
 restartContainer.addEventListener('click', function () {
+    resetGame();
+});
+
+
+// Reset the game
+function resetGame() {
     cards = 16;
     stars = 5;
     hints = 3;
@@ -276,7 +308,8 @@ restartContainer.addEventListener('click', function () {
     minMatch = 3;
     stopTime();
     startGame();
-})
+}
+
 
 // Initiate the game
 function startGame() {
