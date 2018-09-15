@@ -152,6 +152,7 @@ function matchCards(selectedCards) {
         selectedCards[0].classList.toggle('match');
         selectedCards[1].classList.toggle('match');
         openCards = [];
+        gainLive()
     } else {
         setTimeout( function(){
             flipCards(selectedCards[0]);
@@ -161,6 +162,29 @@ function matchCards(selectedCards) {
         loseLive();
     }
 }
+
+
+// Add Star for matching cards n times in a row
+let matched = 0;
+let matchedRow = 0;
+let minMatch = 3;
+
+function gainLive() {
+    matched++;
+    matchedRow++;
+    if (matchedRow === minMatch) {
+        stars++;
+        let starsList = Array.prototype.slice.call(document.querySelectorAll('.fa-star'));
+        for (let i = 0; i < starsList.length; i++) {
+            if (starsList[i].classList.contains('lost')) {
+                starsList[i].classList.toggle('lost');
+                break;
+            }
+        };
+        matchedRow = 0;
+    }
+}
+
 
 // Remove star for not matching cards
 function loseLive() {
