@@ -226,7 +226,7 @@ function loseLive() {
 // Random card selection logic from https://stackoverflow.com/a/4550514
 function giveHint() {
     if (hints >= 1) {
-        let unmatchedCards = Array.prototype.slice.call(document.querySelectorAll('li.card:not(.match)'));
+        let unmatchedCards = Array.prototype.slice.call(document.querySelectorAll('li.card:not(.match):not(.open)'));
         let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
         flipCards(randomCard);
         setTimeout(function () {
