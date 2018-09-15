@@ -189,6 +189,7 @@ function gainLive() {
 // Remove star for not matching cards
 function loseLive() {
     stars--;
+    matchedRow = 0;
     let starsList = Array.prototype.slice.call(document.querySelectorAll('.fa-star'));
     for (let i = starsList.length -1; i >= 0; i--) {
         if (!starsList[i].classList.contains('lost')) {
