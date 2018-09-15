@@ -111,7 +111,34 @@ function stopTime() {
 }
 
 
-// Reset game when restart button is clicked
+// Show Cards for 5 seconds
+function showCards() {
+    document.querySelectorAll('.card').forEach(function(card) {
+      card.classList.add('open', 'show');
+    });
+    setTimeout(function(){
+      document.querySelectorAll('.card').forEach(function(card) {
+        card.classList.remove('open', 'show');
+      });
+    }, 5000);
+  }
+
+
+// Count Moves
+let moves = 0;
+const movesContainer = document.querySelector('.moves');
+
+function generateMoves() {
+    movesContainer.innerHTML = moves;
+}
+
+function addMove() {
+    moves++;
+    movesContainer.textContent = moves;
+}
+
+
+  // Reset game when restart button is clicked
 const restartGame = document.querySelector('.restart');
 restartGame.addEventListener('click', function() { window.location.reload();})
 
@@ -131,7 +158,9 @@ function startGame(){
     generateCards(cards);
     generateStars(stars);
     generateHints(hints);
+    generateMoves();
     startTime();
+    showCards();
 }
 
 startGame()
