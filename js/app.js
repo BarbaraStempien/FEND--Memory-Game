@@ -1,4 +1,3 @@
-
 //  Create a list that holds all cards
 let cardsImages = [
     'fa-anchor',
@@ -21,7 +20,8 @@ let cardsImages = [
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -46,7 +46,7 @@ function cardsTemplate(img) {
 
 function generateCards(cards) {
     cardsImages = shuffle(cardsImages);
-    let cardsHTML = cardsImages.slice(0, cards).map(function(img) {
+    let cardsHTML = cardsImages.slice(0, cards).map(function (img) {
         return cardsTemplate(img);
     });
 
@@ -55,7 +55,7 @@ function generateCards(cards) {
 
 // Generate Stars
 let stars = 5;
-const starsContainer =  document.querySelector('.stars');
+const starsContainer = document.querySelector('.stars');
 const starsTemplate = '<li><i class="fa fa-star"></i></li>';
 
 function generateStars(stars) {
@@ -65,7 +65,7 @@ function generateStars(stars) {
 
 // Generate Hints
 let hints = 3;
-const hintsContainer =  document.querySelector('.hints');
+const hintsContainer = document.querySelector('.hints');
 const hintsTemplate = '<li><i class="fa fa-lightbulb"></i></li>';
 
 function generateHints(hints) {
@@ -101,7 +101,8 @@ function setTime() {
     timerContainer.textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
 }
 
-let timer = null; 
+let timer = null;
+
 function startTime() {
     timer = setInterval(setTime, 1000);
 }
@@ -113,15 +114,15 @@ function stopTime() {
 
 // Show Cards for 5 seconds
 function showCards() {
-    document.querySelectorAll('.card').forEach(function(card) {
-      card.classList.add('open', 'show');
+    document.querySelectorAll('.card').forEach(function (card) {
+        card.classList.add('open', 'show');
     });
-    setTimeout(function(){
-      document.querySelectorAll('.card').forEach(function(card) {
-        card.classList.remove('open', 'show');
-      });
+    setTimeout(function () {
+        document.querySelectorAll('.card').forEach(function (card) {
+            card.classList.remove('open', 'show');
+        });
     }, 5000);
-  }
+}
 
 
 // Count Moves
@@ -147,6 +148,7 @@ function flipCards(card) {
 
 // Check if Cards Match
 let openCards = [];
+
 function matchCards(selectedCards) {
     if (selectedCards[0].firstElementChild.className === selectedCards[1].firstElementChild.className) {
         selectedCards[0].classList.toggle('match');
@@ -154,11 +156,11 @@ function matchCards(selectedCards) {
         openCards = [];
         gainLive()
     } else {
-        setTimeout( function(){
+        setTimeout(function () {
             flipCards(selectedCards[0]);
             flipCards(selectedCards[1]);
             openCards = [];
-        } ,1000);
+        }, 1000);
         loseLive();
     }
 }
@@ -191,7 +193,7 @@ function loseLive() {
     stars--;
     matchedRow = 0;
     let starsList = Array.prototype.slice.call(document.querySelectorAll('.fa-star'));
-    for (let i = starsList.length -1; i >= 0; i--) {
+    for (let i = starsList.length - 1; i >= 0; i--) {
         if (!starsList[i].classList.contains('lost')) {
             starsList[i].classList.toggle('lost');
             break;
@@ -207,7 +209,7 @@ function giveHint() {
         let unmatchedCards = Array.prototype.slice.call(document.querySelectorAll('li.card:not(.match)'));
         let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
         flipCards(randomCard);
-        setTimeout( function(){
+        setTimeout(function () {
             flipCards(randomCard);
         }, 1000);
         removeHint();
@@ -217,7 +219,7 @@ function giveHint() {
 function removeHint() {
     hints--;
     let hintsList = Array.prototype.slice.call(document.querySelectorAll('.fa-lightbulb'));
-    for (let i = hintsList.length -1; i >= 0; i--) {
+    for (let i = hintsList.length - 1; i >= 0; i--) {
         if (!hintsList[i].classList.contains('used')) {
             hintsList[i].classList.toggle('used');
             break;
@@ -227,32 +229,32 @@ function removeHint() {
 
 
 // Cards interactivity
-cardsContainer.addEventListener('click', function(e) {
+cardsContainer.addEventListener('click', function (e) {
     const clickTarget = event.target;
     if (clickTarget.classList.contains('card') &&
         !clickTarget.classList.contains('match') &&
-        (openCards.length < 2) && 
+        (openCards.length < 2) &&
         !openCards.includes(clickTarget)
     ) {
-            flipCards(clickTarget);
-            openCards.push(clickTarget);
-            if (openCards.length === 2) {
-                matchCards(openCards);
-                addMove();
-            }
+        flipCards(clickTarget);
+        openCards.push(clickTarget);
+        if (openCards.length === 2) {
+            matchCards(openCards);
+            addMove();
+        }
     }
 });
 
 
 // Hint interactivity
-hintsContainer.addEventListener('click', function() {
+hintsContainer.addEventListener('click', function () {
     giveHint();
 });
 
 
 // Reset game
 const restartContainer = document.querySelector('.restart');
-restartContainer.addEventListener('click', function() {
+restartContainer.addEventListener('click', function () {
     cards = 16;
     stars = 5;
     hints = 3;
@@ -267,19 +269,8 @@ restartContainer.addEventListener('click', function() {
     startGame();
 })
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
- // Initiate the game
-function startGame(){
+// Initiate the game
+function startGame() {
     generateCards(cards);
     generateStars(stars);
     generateHints(hints);
