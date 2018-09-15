@@ -53,6 +53,16 @@ function generateCards(cards) {
     cardsContainer.innerHTML = cardsHTML.join('');
 }
 
+// Generate Stars
+let stars = 5;
+const starsContainer =  document.querySelector('.stars');
+const starsTemplate = '<li><i class="fa fa-star"></i></li>';
+
+function generateStars(stars) {
+    let starsHTML = starsTemplate.repeat(stars);
+    starsContainer.innerHTML = starsHTML;
+}
+
 
 // Reset game when restart button is clicked
 const restartGame = document.querySelector('.restart');
@@ -102,6 +112,7 @@ setInterval(setTime, 1000);
  // Initiate the game
 function startGame(){
     generateCards(cards);
+    generateStars(stars);
 }
 
 startGame()
