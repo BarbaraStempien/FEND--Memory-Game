@@ -168,7 +168,7 @@ cardsContainer.addEventListener('click', function(e) {
     if (clickTarget.classList.contains('card') &&
         !clickTarget.classList.contains('match') &&
         (openCards.length < 2) && 
-        !includes(openCards, clickTarget)
+        !openCards.includes(clickTarget)
     ) {
             flipCards(clickTarget);
             openCards.push(clickTarget);
