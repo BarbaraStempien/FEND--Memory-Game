@@ -138,6 +138,22 @@ function addMove() {
 }
 
 
+// Flip Card
+function flipCards(card) {
+    card.classList.toggle('open');
+    card.classList.toggle('show');
+}
+
+// Cards interactivity
+cardsContainer.addEventListener('click', function(e) {
+    const clickTarget = event.target;
+    if (clickTarget.classList.contains('card'))
+    {
+        flipCards(clickTarget);
+    }
+});
+
+
   // Reset game when restart button is clicked
 const restartGame = document.querySelector('.restart');
 restartGame.addEventListener('click', function() { window.location.reload();})
