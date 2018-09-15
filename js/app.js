@@ -165,6 +165,19 @@ function matchCards(selectedCards) {
     }
 }
 
+function gameWon() {
+    stopTime();
+    finalStats();
+    document.querySelector('.game-won').classList.remove('hide');
+    toggleModal();
+}
+
+function gameOver() {
+    stopTime();
+    finalStats();
+    document.querySelector('.game-over').classList.remove('hide');
+    toggleModal();
+}
 
 // Add Star for matching cards n times in a row
 let pairs = cards / 2;
@@ -187,8 +200,7 @@ function gainLive() {
         matchedRow = 0;
     }
     if (pairs === matched) {
-        // TODO: Game won
-        console.log('Game won');
+        gameWon();
     }
 }
 
@@ -205,9 +217,7 @@ function loseLive() {
         }
     }
     if (stars === 0) {
-        stopTime()
-        finalStats()
-        toggleModal();
+        gameOver();
     }
 }
 
@@ -307,6 +317,8 @@ function resetGame() {
     matchedRow = 0;
     minMatch = 3;
     stopTime();
+    document.querySelector('.game-over').classList.add('hide');
+    document.querySelector('.game-won').classList.add('hide');
     startGame();
 }
 
