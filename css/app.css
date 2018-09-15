@@ -219,3 +219,7 @@ body.modal-open {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.modal-description {
+    text-align: center;
+}

@@ -274,7 +274,7 @@ hintsContainer.addEventListener('click', function () {
 
 // Show game won / over modal
 function toggleModal() {
-    const modal = document.querySelector('.modal');
+    const modal = document.querySelector('.modal.game-result');
     modal.classList.toggle('hide');
     document.body.classList.toggle('modal-open');   
 }
@@ -333,4 +333,15 @@ function startGame() {
     showCards();
 }
 
-startGame()
+function toggleWelcomeModal() {
+    const modal = document.querySelector('.modal.welcome');
+    modal.classList.toggle('hide');
+    document.body.classList.toggle('modal-open');   
+}
+
+document.querySelectorAll('.start-game').forEach(function (element) {
+    element.addEventListener('click', function() {
+        toggleWelcomeModal();
+        startGame();
+    });
+});

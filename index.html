@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
+
+<body class="modal-open">
 
     <div class="container">
         <header>
@@ -16,29 +19,49 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        	</ul>
+            <ul class="stars">
+            </ul>
 
-        	<span class="moves">3</span> Moves
+            <span class="moves">3</span> Moves
 
             <div class="restart">
-        		<i class="fa fa-redo"></i>
+                <i class="fa fa-redo"></i>
             </div>
-            
+
             <div class="timer">
-              Time: <span class="time">00:00:00</span>
+                Time: <span class="time">00:00:00</span>
             </div>
 
             <ul class="hints">
             </ul>
-            
+
         </section>
 
         <ul class="deck">
         </ul>
     </div>
 
-    <div class="modal hide">
+    <div class="modal welcome">
+        <div class="modal-content">
+            <button class="modal-x start-game">
+                <i class="fas fa-times"></i>
+            </button>
+            <header>
+                <h2 class="modal-header">Welcome to Memory Game!</h2>
+            </header>
+            <section class="modal-description">
+                <p>
+                    This is a memory (concentration) game. The object of the game is to turn over pairs of matching cards.
+                    A user wins once all cards have successfully been matched.
+                </p>
+            </section>
+            <footer class="modal-footer">
+                <button class="modal-button start-game">Play!</button>
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal game-result hide">
         <div class="modal-content">
             <button class="modal-x close">
                 <i class="fas fa-times"></i>
@@ -72,4 +95,5 @@
 
     <script src="js/app.js"></script>
 </body>
+
 </html>
