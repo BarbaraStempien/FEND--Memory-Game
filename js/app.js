@@ -161,10 +161,12 @@ function showCards() {
     document.querySelectorAll('.card').forEach(function (card) {
         card.classList.add('open', 'show');
     });
+    document.body.classList.add('avoid-clicks');
     setTimeout(function () {
         document.querySelectorAll('.card').forEach(function (card) {
             card.classList.remove('open', 'show');
         });
+        document.body.classList.remove('avoid-clicks');
     }, 5000);
 }
 

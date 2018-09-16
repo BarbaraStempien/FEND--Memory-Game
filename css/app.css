@@ -134,6 +134,13 @@ h1 {
     color: #808080;
 }
 
+/* 
+* Prevent clicks when cards are displayed for 5 seconds
+*/
+.avoid-clicks {
+    pointer-events: none;
+}
+
 /*
  * Styles for the Modal Panel
  */
