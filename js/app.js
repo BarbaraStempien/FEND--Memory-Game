@@ -1,3 +1,43 @@
+// Set Game Level
+let level, cards, stars, hints, pairs, minMatch, maxStars;
+
+const gameLevels = {
+    easy: {
+        cards: 12,
+        stars: 5,
+        maxStars: 5,
+        hints: 3,
+        pairs: 6,
+        minMatch: 2
+    },
+    medium: {
+        cards: 16,
+        stars: 4,
+        maxStars: 4,
+        hints: 2,
+        pairs: 8,
+        minMatch: 3
+    },
+    hard: {
+        cards: 20,
+        stars: 3,
+        maxStars: 3,
+        hints: 1,
+        pairs: 10,
+        minMatch: 4
+    }
+};
+
+const setLevel = level => {
+    cards = gameLevels[level].cards;
+    stars = gameLevels[level].stars;
+    maxStars = gameLevels[level].maxStars;
+    hints = gameLevels[level].hints;
+    pairs = gameLevels[level].pairs;
+    minMatch = gameLevels[level].minMatch;
+};
+
+
 //  Create a list that holds all cards
 let cardsImages = [
     'fa-anchor',
@@ -15,7 +55,15 @@ let cardsImages = [
     'fa-leaf',
     'fa-leaf',
     'fa-paper-plane',
-    'fa-paper-plane'
+    'fa-paper-plane',
+    'fa-balance-scale',
+    'fa-balance-scale',
+    'fa-beer',
+    'fa-beer',
+    'fa-chess',
+    'fa-chess',
+    'fa-futbol',
+    'fa-futbol'
 ];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -34,10 +82,8 @@ function shuffle(array) {
     return array;
 };
 
-
 // Generate Cards
 // Some inspiration from https://www.youtube.com/watch?v=_rUH-sEs68Y
-let cards = 16;
 const cardsContainer = document.querySelector('.deck');
 
 function cardsTemplate(img) {
@@ -45,8 +91,8 @@ function cardsTemplate(img) {
 }
 
 function generateCards(cards) {
-    cardsImages = shuffle(cardsImages);
-    let cardsHTML = cardsImages.slice(0, cards).map(function (img) {
+    shuffledImages = shuffle(cardsImages.slice(0, cards));
+    let cardsHTML = shuffledImages.map(function (img) {
         return cardsTemplate(img);
     });
 
@@ -54,7 +100,6 @@ function generateCards(cards) {
 }
 
 // Generate Stars
-let stars = 5;
 const starsContainer = document.querySelector('.stars');
 const starsTemplate = '<li><i class="fa fa-star"></i></li>';
 
@@ -64,7 +109,6 @@ function generateStars(stars) {
 }
 
 // Generate Hints
-let hints = 3;
 const hintsContainer = document.querySelector('.hints');
 const hintsTemplate = '<li><i class="fa fa-lightbulb"></i></li>';
 
@@ -180,21 +224,21 @@ function gameOver() {
 }
 
 // Add Star for matching cards n times in a row
-let pairs = cards / 2;
 let matched = 0;
 let matchedRow = 0;
-let minMatch = 3;
 
 function gainLive() {
     matched++;
     matchedRow++;
     if (matchedRow === minMatch) {
-        stars++;
-        let starsList = Array.prototype.slice.call(document.querySelectorAll('.fa-star'));
-        for (let i = 0; i < starsList.length; i++) {
-            if (starsList[i].classList.contains('lost')) {
-                starsList[i].classList.toggle('lost');
-                break;
+        if (stars < maxStars) {
+            stars++;
+            let starsList = Array.prototype.slice.call(document.querySelectorAll('.fa-star'));
+            for (let i = 0; i < starsList.length; i++) {
+                if (starsList[i].classList.contains('lost')) {
+                    starsList[i].classList.toggle('lost');
+                    break;
+                }
             }
         };
         matchedRow = 0;
@@ -276,10 +320,10 @@ hintsContainer.addEventListener('click', function () {
 function toggleModal() {
     const modal = document.querySelector('.modal.game-result');
     modal.classList.toggle('hide');
-    document.body.classList.toggle('modal-open');   
+    document.body.classList.toggle('modal-open');
 }
 
-
+// Display stats
 function finalStats() {
     document.querySelector('.final-stars').innerHTML = stars;
     document.querySelector('.final-moves').innerHTML = moves;
@@ -291,40 +335,31 @@ function finalStats() {
 
 // Close modal
 document.querySelectorAll('.close').forEach(function (element) {
-    element.addEventListener('click', function() {
+    element.addEventListener('click', function () {
         toggleModal();
-        resetGame();
+        startGame(level);
     });
 });
 
 // Restart button interactivity
 const restartContainer = document.querySelector('.restart');
 restartContainer.addEventListener('click', function () {
-    resetGame();
+    startGame(level);
 });
 
 
-// Reset the game
-function resetGame() {
-    cards = 16;
-    stars = 5;
-    hints = 3;
+// Initiate the game
+function startGame(level) {
+    document.querySelector('.game-over').classList.add('hide');
+    document.querySelector('.game-won').classList.add('hide');
+    stopTime();
     seconds = 0;
     minutes = 0;
     hours = 0;
     moves = 0;
     matched = 0;
     matchedRow = 0;
-    minMatch = 3;
-    stopTime();
-    document.querySelector('.game-over').classList.add('hide');
-    document.querySelector('.game-won').classList.add('hide');
-    startGame();
-}
-
-
-// Initiate the game
-function startGame() {
+    setLevel(level);
     generateCards(cards);
     generateStars(stars);
     generateHints(hints);
@@ -333,15 +368,33 @@ function startGame() {
     showCards();
 }
 
+// Display welcome modal
 function toggleWelcomeModal() {
     const modal = document.querySelector('.modal.welcome');
     modal.classList.toggle('hide');
-    document.body.classList.toggle('modal-open');   
+    document.body.classList.toggle('modal-open');
 }
 
-document.querySelectorAll('.start-game').forEach(function (element) {
-    element.addEventListener('click', function() {
-        toggleWelcomeModal();
-        startGame();
-    });
+// Select game level
+document.querySelector('#easy-level').addEventListener('click', function () {
+    toggleWelcomeModal();
+    level = 'easy';
+    startGame(level);
+});
+
+document.querySelector('#medium-level').addEventListener('click', function () {
+    toggleWelcomeModal();
+    level = 'medium';
+    startGame(level);
+});
+
+document.querySelector('#hard-level').addEventListener('click', function () {
+    toggleWelcomeModal();
+    level = 'hard';
+    startGame(level);
+});
+
+// Change level button
+document.querySelector('.change-level').addEventListener('click', function () {
+    toggleWelcomeModal();
 });

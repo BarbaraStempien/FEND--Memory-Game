@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -139,20 +140,23 @@ h1 {
 
 @-webkit-keyframes fadeIn {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
+
     100% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  @keyframes fadeIn {
+}
+
+@keyframes fadeIn {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
+
     100% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}
 
 .modal {
     position: fixed;
@@ -162,11 +166,11 @@ h1 {
     left: 0;
     background-color: rgba(0, 0, 0, 0.88);
     -webkit-animation-duration: 1s;
-            animation-duration: 1s;
+    animation-duration: 1s;
     -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
+    animation-fill-mode: both;
     -webkit-animation-name: fadeIn;
-            animation-name: fadeIn;
+    animation-name: fadeIn;
 }
 
 body.modal-open {
@@ -185,7 +189,7 @@ body.modal-open {
     max-width: 600px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .modal-x {
@@ -214,10 +218,12 @@ body.modal-open {
     align-items: center;
 }
 
+.level-button,
 .modal-button {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .modal-description {

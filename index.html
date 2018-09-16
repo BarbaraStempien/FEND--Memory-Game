@@ -22,7 +22,7 @@
             <ul class="stars">
             </ul>
 
-            <span class="moves">3</span> Moves
+            <span class="moves">0</span> Moves
 
             <div class="restart">
                 <i class="fa fa-redo"></i>
@@ -35,6 +35,12 @@
             <ul class="hints">
             </ul>
 
+            <div class="change-level">
+                <button class="level-button">
+                    Change level
+                </button>
+            </div>
+
         </section>
 
         <ul class="deck">
@@ -43,20 +49,23 @@
 
     <div class="modal welcome">
         <div class="modal-content">
-            <button class="modal-x start-game">
-                <i class="fas fa-times"></i>
-            </button>
             <header>
                 <h2 class="modal-header">Welcome to Memory Game!</h2>
             </header>
             <section class="modal-description">
                 <p>
-                    This is a memory (concentration) game. The object of the game is to turn over pairs of matching cards.
+                    This is a memory (concentration) game. The object of the game is to turn over pairs of matching
+                    cards.
                     A user wins once all cards have successfully been matched.
                 </p>
             </section>
             <footer class="modal-footer">
-                <button class="modal-button start-game">Play!</button>
+                <p>
+                    Select level:
+                </p>
+                <button id="easy-level" class="modal-button start-game">Easy</button>
+                <button id="medium-level" class="modal-button start-game">Medium</button>
+                <button id="hard-level" class="modal-button start-game">Hard</button>
             </footer>
         </div>
     </div>
