@@ -35,10 +35,11 @@
             <ul class="hints">
             </ul>
 
-            <div class="change-level">
+            <div class="panel-button">
                 <button class="level-button">
                     Change level
                 </button>
+                <button class="score-button show-score">Show scores</button>
             </div>
 
         </section>
@@ -70,6 +71,37 @@
         </div>
     </div>
 
+    <div class="modal score hide">
+        <div class="modal-content">
+            <header>
+                <h2 class="modal-header">Your scores</h2>
+            </header>
+            <section class="modal-description">
+                <table class="scoreboard">
+                    <thead>
+                        <tr class="scoreboard-header">
+                            <th>Level</th>
+                            <th>Result</th>
+                            <th>Pairs Matched</th>
+                            <th>Stars Left</th>
+                            <th>Moves Done</th>
+                            <th>Hints Left</th>
+                            <th>Time Passed</th>
+                        </tr>
+                    </thead>
+                    <tbody class="scoreboard-results">
+                    </tbody>
+        </div>
+        </table>
+        </section>
+        <footer class="modal-footer">
+            <button class="modal-button show-score">Back</button>
+        </footer>
+    </div>
+    </div>
+
+
+
     <div class="modal game-result hide">
         <div class="modal-content">
             <button class="modal-x close">
@@ -80,6 +112,9 @@
                 <h2 class="modal-header game-won hide">Congratulations! You won!</h2>
             </header>
             <section class="modal-stats">
+                <div>
+                    Level: <span class="final-level">0</span>
+                </div>
                 <div>
                     Pairs found: <span class="final-matched">0</span>
                 </div>
@@ -98,6 +133,7 @@
             </section>
             <footer class="modal-footer">
                 <button class="modal-button close">Play again</button>
+                <button class="modal-button show-score-hide">Show scores</button>
             </footer>
         </div>
     </div>

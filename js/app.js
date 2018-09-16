@@ -1,8 +1,8 @@
 // Set Game Level
-let level, cards, stars, hints, pairs, minMatch, maxStars;
+let level, cards, stars, hints, pairs, minMatch, maxStars, gameResult, gameID, saves;
 
 const gameLevels = {
-    easy: {
+    Easy: {
         cards: 12,
         stars: 5,
         maxStars: 5,
@@ -10,7 +10,7 @@ const gameLevels = {
         pairs: 6,
         minMatch: 2
     },
-    medium: {
+    Medium: {
         cards: 16,
         stars: 4,
         maxStars: 4,
@@ -18,7 +18,7 @@ const gameLevels = {
         pairs: 8,
         minMatch: 3
     },
-    hard: {
+    Hard: {
         cards: 20,
         stars: 3,
         maxStars: 3,
@@ -212,6 +212,7 @@ function matchCards(selectedCards) {
 function gameWon() {
     stopTime();
     finalStats();
+    saveGameScore()
     document.querySelector('.game-won').classList.remove('hide');
     toggleModal();
 }
@@ -219,6 +220,7 @@ function gameWon() {
 function gameOver() {
     stopTime();
     finalStats();
+    saveGameScore()
     document.querySelector('.game-over').classList.remove('hide');
     toggleModal();
 }
@@ -244,6 +246,7 @@ function gainLive() {
         matchedRow = 0;
     }
     if (pairs === matched) {
+        gameResult = 'Won';
         gameWon();
     }
 }
@@ -261,6 +264,7 @@ function loseLive() {
         }
     }
     if (stars === 0) {
+        gameResult = 'Lost';
         gameOver();
     }
 }
@@ -325,6 +329,7 @@ function toggleModal() {
 
 // Display stats
 function finalStats() {
+    document.querySelector('.final-level').innerHTML = level;
     document.querySelector('.final-stars').innerHTML = stars;
     document.querySelector('.final-moves').innerHTML = moves;
     document.querySelector('.final-time').textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
@@ -378,23 +383,101 @@ function toggleWelcomeModal() {
 // Select game level
 document.querySelector('#easy-level').addEventListener('click', function () {
     toggleWelcomeModal();
-    level = 'easy';
+    level = 'Easy';
     startGame(level);
 });
 
 document.querySelector('#medium-level').addEventListener('click', function () {
     toggleWelcomeModal();
-    level = 'medium';
+    level = 'Medium';
     startGame(level);
 });
 
 document.querySelector('#hard-level').addEventListener('click', function () {
     toggleWelcomeModal();
-    level = 'hard';
+    level = 'Hard';
     startGame(level);
 });
 
 // Change level button
-document.querySelector('.change-level').addEventListener('click', function () {
+document.querySelector('.level-button').addEventListener('click', function () {
     toggleWelcomeModal();
+});
+
+// Save Game Score
+function currentScore() {
+    let gameScore = {
+        [gameID]: {
+            level: level,
+            result: gameResult,
+            stars: stars,
+            moves: moves,
+            hints: hints,
+            time: padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds),
+            matched: matched
+        }
+    };
+    return gameScore;
+}
+
+function saveGameScore() {
+    if ("GameScore" in localStorage) {
+        saves = JSON.parse(localStorage.getItem("GameScore"));
+        let gameIDs = Object.keys(saves).map(Number);
+        gameID = Math.max(...gameIDs) + 1;
+        gameScore = currentScore();
+        saves = { ...saves,
+            ...gameScore
+        };
+    } else {
+        gameID = 1;
+        saves = currentScore();
+    }
+
+    let gameStats = JSON.stringify(saves);
+    localStorage.setItem("GameScore", gameStats);
+}
+
+const scoreboardContainer = document.querySelector('.scoreboard-results');
+
+function scoreboardTemplate(level, result, matched, stars, moves, hints, time) {
+    return `<tr class="score">
+                <td>${level}</td>
+                <td>${result}</td>
+                <td>${matched}</td>
+                <td>${stars}</td>
+                <td>${moves}</td>
+                <td>${hints}</td>
+                <td>${time}</td>
+            </tr>`;
+}
+
+function generateScoreboard() {
+    if ("GameScore" in localStorage) {
+        saves = Object.values(JSON.parse(localStorage.getItem("GameScore")));
+        let scoresHTML = saves.slice(saves.length - 5).map(function(record) {
+                return scoreboardTemplate(record.level, record.result, record.matched, record.stars, record.moves, record.hints, record.time)
+            });
+        
+            scoreboardContainer.innerHTML = scoresHTML.join('');
+    }
+}
+
+// Show scores modal
+function toggleScoreModal() {
+    const scoreModal = document.querySelector('.modal.score');
+    generateScoreboard();
+    scoreModal.classList.toggle('hide');
+    document.body.classList.toggle('modal-open');
+}
+
+document.querySelectorAll('.show-score').forEach(function (element) {
+    element.addEventListener('click', function () {
+        toggleScoreModal();
+    });
+});
+
+document.querySelector('.show-score-hide').addEventListener('click', function () {
+    toggleModal();
+    toggleScoreModal();
 });

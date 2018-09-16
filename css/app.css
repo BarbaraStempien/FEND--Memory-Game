@@ -218,6 +218,7 @@ body.modal-open {
     align-items: center;
 }
 
+.score-button,
 .level-button,
 .modal-button {
     padding: 10px 20px;
