@@ -228,7 +228,7 @@ const generateScoreboard = () => {
   if ('GameStats' in window.localStorage) {
     storageStats = Object.values(JSON.parse(window.localStorage.getItem('GameStats')));
     let scoresHTML = storageStats.slice(storageStats.length - 5).map(record => scoreboardTemplate(record.level, record.result, record.matched, record.stars, record.moves, record.hints, record.time));
-    scoreboardContainer.innerHTML = scoresHTML.join('');
+    scoreboardContainer.innerHTML = scoresHTML.reverse().join('');
   }
 };
 
