@@ -15,6 +15,7 @@ let level,
   gameResult,
   currentGameID,
   gameScore,
+  historicalGameIDs,
   storageStats;
 
 // GAME'S DIFFICULTY LEVEL
@@ -194,7 +195,7 @@ function currentGameStats () {
 const saveGameStats = () => {
   if ('GameStats' in window.localStorage) {
     storageStats = JSON.parse(window.localStorage.getItem('GameStats'));
-    let historicalGameIDs = Object.keys(storageStats).map(Number);
+    historicalGameIDs = Object.keys(storageStats).map(Number);
     currentGameID = Math.max(...historicalGameIDs) + 1;
     gameScore = currentGameStats();
     storageStats = { ...storageStats,
@@ -410,19 +411,22 @@ const startGame = level => {
 // EVENT LISTENERS
 
 // Select game level
-document.querySelector('#easy-level').addEventListener('click', () => {
+const easyLevelButton = document.querySelector('#easy-level');
+easyLevelButton.addEventListener('click', () => {
   toggleWelcomeModal();
   level = 'Easy';
   startGame(level);
 });
 
-document.querySelector('#medium-level').addEventListener('click', () => {
+const mediumLevelButton = document.querySelector('#medium-level');
+mediumLevelButton.addEventListener('click', () => {
   toggleWelcomeModal();
   level = 'Medium';
   startGame(level);
 });
 
-document.querySelector('#hard-level').addEventListener('click', () => {
+const hardLevelButton = document.querySelector('#hard-level');
+hardLevelButton.addEventListener('click', () => {
   toggleWelcomeModal();
   level = 'Hard';
   startGame(level);
@@ -452,9 +456,9 @@ hintsContainer.addEventListener('click', () => giveHint());
 // Toogle game won / over modal
 const playAgainButton = document.querySelector('.play-again');
 playAgainButton.addEventListener('click', () => {
-    toggleResultModal();
-    startGame(level);
-  });
+  toggleResultModal();
+  startGame(level);
+});
 
 // Scoreboard
 const mainShowScoreboardButton = document.querySelector('.main-show-scoreboard');
@@ -470,26 +474,27 @@ mainShowScoreboardButton.addEventListener('click', () => {
 resultsShowScoreboardButton.addEventListener('click', () => {
   scoreboardCloseButton.classList.add('back-results');
   toggleResultModal();
-    toggleScoreModal();
-  });
+  toggleScoreModal();
+});
 
 // Scoreboard back button
 scoreboardCloseButton.addEventListener('click', e => {
   const clickTarget = e.target;
   if (clickTarget.classList.contains('back-results')) {
     toggleScoreModal();
-  toggleResultModal();
+    toggleResultModal();
     clickTarget.classList.remove('back-results');
   } else {
-  toggleScoreModal();
+    toggleScoreModal();
   }
 });
 
 // Restart game button
-const restartContainer = document.querySelector('.restart');
-restartContainer.addEventListener('click', () => startGame(level));
+const restartGameButton = document.querySelector('.restart');
+restartGameButton.addEventListener('click', () => startGame(level));
 
 // Change level button
-document.querySelector('.level-button').addEventListener('click', () => {
+const changeLevelButton = document.querySelector('.level-button');
+changeLevelButton.addEventListener('click', () => {
   toggleWelcomeModal();
 });
