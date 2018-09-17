@@ -1,122 +1,116 @@
 let level,
-    cards,
-    pairs,
-    stars,
-    maxStars,
-    moves,
-    hints,
-    seconds,
-    minutes,
-    hours,
-    timer,
-    matched,
-    bonusStar,
-    matchedRow,
-    gameResult,
-    currentGameID,
-    storageStats;
-
-
+  cards,
+  pairs,
+  stars,
+  maxStars,
+  moves,
+  hints,
+  seconds,
+  minutes,
+  hours,
+  timer,
+  matched,
+  bonusStar,
+  matchedRow,
+  gameResult,
+  currentGameID,
+  gameScore,
+  storageStats;
 
 // GAME'S DIFFICULTY LEVEL
 
 // Define levels
 const gameLevels = {
-    Easy: {
-        cards: 12,
-        stars: 5,
-        maxStars: 5,
-        hints: 3,
-        pairs: 6,
-        bonusStar: 2
-    },
-    Medium: {
-        cards: 16,
-        stars: 4,
-        maxStars: 4,
-        hints: 2,
-        pairs: 8,
-        bonusStar: 3
-    },
-    Hard: {
-        cards: 20,
-        stars: 3,
-        maxStars: 3,
-        hints: 1,
-        pairs: 10,
-        bonusStar: 4
-    }
+  Easy: {
+    cards: 12,
+    stars: 5,
+    maxStars: 5,
+    hints: 3,
+    pairs: 6,
+    bonusStar: 2
+  },
+  Medium: {
+    cards: 16,
+    stars: 4,
+    maxStars: 4,
+    hints: 2,
+    pairs: 8,
+    bonusStar: 3
+  },
+  Hard: {
+    cards: 20,
+    stars: 3,
+    maxStars: 3,
+    hints: 1,
+    pairs: 10,
+    bonusStar: 4
+  }
 };
 
 // Set variables according to the difficulty level
 const setLevel = level => {
-    cards = gameLevels[level].cards;
-    stars = gameLevels[level].stars;
-    maxStars = gameLevels[level].maxStars;
-    hints = gameLevels[level].hints;
-    pairs = gameLevels[level].pairs;
-    bonusStar = gameLevels[level].bonusStar;
+  cards = gameLevels[level].cards;
+  stars = gameLevels[level].stars;
+  maxStars = gameLevels[level].maxStars;
+  hints = gameLevels[level].hints;
+  pairs = gameLevels[level].pairs;
+  bonusStar = gameLevels[level].bonusStar;
 };
-
-
 
 // GENERATE CARDS
 
 //  Cards images
 let cardsImages = [
-    'fa-anchor',
-    'fa-anchor',
-    'fa-bicycle',
-    'fa-bicycle',
-    'fa-bolt',
-    'fa-bolt',
-    'fa-bomb',
-    'fa-bomb',
-    'fa-cube',
-    'fa-cube',
-    'fa-gem',
-    'fa-gem',
-    'fa-leaf',
-    'fa-leaf',
-    'fa-paper-plane',
-    'fa-paper-plane',
-    'fa-balance-scale',
-    'fa-balance-scale',
-    'fa-beer',
-    'fa-beer',
-    'fa-chess',
-    'fa-chess',
-    'fa-futbol',
-    'fa-futbol'
+  'fa-anchor',
+  'fa-anchor',
+  'fa-bicycle',
+  'fa-bicycle',
+  'fa-bolt',
+  'fa-bolt',
+  'fa-bomb',
+  'fa-bomb',
+  'fa-cube',
+  'fa-cube',
+  'fa-gem',
+  'fa-gem',
+  'fa-leaf',
+  'fa-leaf',
+  'fa-paper-plane',
+  'fa-paper-plane',
+  'fa-balance-scale',
+  'fa-balance-scale',
+  'fa-beer',
+  'fa-beer',
+  'fa-chess',
+  'fa-chess',
+  'fa-futbol',
+  'fa-futbol'
 ];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
+function shuffle (array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
-};
+  return array;
+}
 
 // Generate Cards and add to the DOM, some inspiration from https://www.youtube.com/watch?v=_rUH-sEs68Y
 const cardsContainer = document.querySelector('.deck');
 const cardsTemplate = img => `<li class="card"><i class="fa ${img}"></i></li>`;
 
 const generateCards = cards => {
-    shuffledImages = shuffle(cardsImages.slice(0, cards));
-    let cardsHTML = shuffledImages.map(img => cardsTemplate(img));
-    cardsContainer.innerHTML = cardsHTML.join('');
+  let shuffledImages = shuffle(cardsImages.slice(0, cards));
+  let cardsHTML = shuffledImages.map(img => cardsTemplate(img));
+  cardsContainer.innerHTML = cardsHTML.join('');
 };
-
-
 
 // GENERATE STARS
 
@@ -125,53 +119,47 @@ const starsContainer = document.querySelector('.stars');
 const starsTemplate = '<li><i class="fa fa-star"></i></li>';
 
 const generateStars = stars => {
-    let starsHTML = starsTemplate.repeat(stars);
-    starsContainer.innerHTML = starsHTML;
+  let starsHTML = starsTemplate.repeat(stars);
+  starsContainer.innerHTML = starsHTML;
 };
-
-
 
 // CREATE TIMER
 
 // Pad function adapted from https://stackoverflow.com/q/20618355
-const padTime = timeUnit => (timeUnit < 10) ? timeUnit = '0' + timeUnit : timeUnit;
+const padTime = timeUnit => timeUnit < 10 ? (timeUnit = '0' + timeUnit) : timeUnit;
 
 // Create Timer and add to the DOM
 const timerContainer = document.querySelector('.time');
 const setTime = () => {
-    seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-        }
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
     }
-    timerContainer.textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
+  }
+  timerContainer.textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
 };
 
 // Start Timer
-const startTime = () => timer = setInterval(setTime, 1000);
+const startTime = () => { timer = setInterval(setTime, 1000); };
 
 // Stop Timer
 const stopTime = () => clearInterval(timer);
-
-
 
 // CREATE MOVES COUNTER
 
 // Generate Moves counter and add to the DOM
 const movesContainer = document.querySelector('.moves');
-const generateMoves = () => movesContainer.innerHTML = moves;
+const generateMoves = () => { movesContainer.innerHTML = moves; };
 
 // Once the user makes the move, increment number of moves and update the DOM
 const addMove = () => {
-    moves++;
-    movesContainer.textContent = moves;
+  moves++;
+  movesContainer.textContent = moves;
 };
-
-
 
 // CREATE HINTS
 
@@ -180,53 +168,50 @@ const hintsContainer = document.querySelector('.hints');
 const hintsTemplate = '<li><i class="fa fa-lightbulb"></i></li>';
 
 const generateHints = hints => {
-    let hintsHTML = hintsTemplate.repeat(hints);
-    hintsContainer.innerHTML = hintsHTML;
+  let hintsHTML = hintsTemplate.repeat(hints);
+  hintsContainer.innerHTML = hintsHTML;
 };
-
-
 
 // CREATE SCOREBOARD
 
 // Save current game statistics
-function currentGameStats() {
-    let gameScore = {
-        [currentGameID]: {
-            level: level,
-            result: gameResult,
-            stars: stars,
-            moves: moves,
-            hints: hints,
-            time: padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds),
-            matched: matched
-        }
-    };
-    return gameScore;
+function currentGameStats () {
+  gameScore = {
+    [currentGameID]: {
+      level: level,
+      result: gameResult,
+      stars: stars,
+      moves: moves,
+      hints: hints,
+      time: padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds),
+      matched: matched
+    }
+  };
+  return gameScore;
 }
 
 // Save statistics of current game in the local storage
 const saveGameStats = () => {
-    if ("GameStats" in localStorage) {
-        storageStats = JSON.parse(localStorage.getItem("GameStats"));
-        let historicalGameIDs = Object.keys(storageStats).map(Number);
-        currentGameID = Math.max(...historicalGameIDs) + 1;
-        gameScore = currentGameStats();
-        storageStats = { ...storageStats,
-            ...gameScore
-        };
-    } else {
-        currentGameID = 1;
-        storageStats = currentGameStats();
-    }
+  if ('GameStats' in window.localStorage) {
+    storageStats = JSON.parse(window.localStorage.getItem('GameStats'));
+    let historicalGameIDs = Object.keys(storageStats).map(Number);
+    currentGameID = Math.max(...historicalGameIDs) + 1;
+    gameScore = currentGameStats();
+    storageStats = { ...storageStats,
+      ...gameScore
+    };
+  } else {
+    currentGameID = 1;
+    storageStats = currentGameStats();
+  }
 
-    let gameStats = JSON.stringify(storageStats);
-    localStorage.setItem("GameStats", gameStats);
+  let gameStats = JSON.stringify(storageStats);
+  window.localStorage.setItem('GameStats', gameStats);
 };
-
 
 // Scoreboard template
 const scoreboardTemplate = (level, result, matched, stars, moves, hints, time) =>
-    `<tr class="score">
+  `<tr class="score">
     <td>${level}</td>
     <td>${result}</td>
     <td>${matched}</td>
@@ -239,237 +224,226 @@ const scoreboardTemplate = (level, result, matched, stars, moves, hints, time) =
 // Generate scoreboard and add to the DOM
 const scoreboardContainer = document.querySelector('.scoreboard-results');
 const generateScoreboard = () => {
-    if ("GameStats" in localStorage) {
-        storageStats = Object.values(JSON.parse(localStorage.getItem("GameStats")));
-        let scoresHTML = storageStats.slice(storageStats.length - 5).map(record => scoreboardTemplate(record.level, record.result, record.matched, record.stars, record.moves, record.hints, record.time));
-        scoreboardContainer.innerHTML = scoresHTML.join('');
-    }
+  if ('GameStats' in window.localStorage) {
+    storageStats = Object.values(JSON.parse(window.localStorage.getItem('GameStats')));
+    let scoresHTML = storageStats.slice(storageStats.length - 5).map(record => scoreboardTemplate(record.level, record.result, record.matched, record.stars, record.moves, record.hints, record.time));
+    scoreboardContainer.innerHTML = scoresHTML.join('');
+  }
 };
-
-
 
 // MODALS
 
 // Welcome modal
 const toggleWelcomeModal = () => {
-    const modal = document.querySelector('.modal.welcome');
-    modal.classList.toggle('hide');
-    document.body.classList.toggle('modal-open');
+  const modal = document.querySelector('.modal.welcome');
+  modal.classList.toggle('hide');
+  document.body.classList.toggle('modal-open');
 };
 
 // Game won / over modal
 const toggleResultModal = () => {
-    const modal = document.querySelector('.modal.game-result');
-    modal.classList.toggle('hide');
-    document.body.classList.toggle('modal-open');
+  const modal = document.querySelector('.modal.game-result');
+  modal.classList.toggle('hide');
+  document.body.classList.toggle('modal-open');
 };
 
 // Scoreboard modal
 const toggleScoreModal = () => {
-    const scoreModal = document.querySelector('.modal.score');
-    generateScoreboard();
-    scoreModal.classList.toggle('hide');
-    document.body.classList.toggle('modal-open');
+  const scoreModal = document.querySelector('.modal.score');
+  generateScoreboard();
+  scoreModal.classList.toggle('hide');
+  document.body.classList.toggle('modal-open');
 };
-
-
 
 // GAME LOGIC
 
 // Show Cards for the first 5 seconds of the game
 const showCards = () => {
-    document.querySelectorAll('.card').forEach(card => card.classList.add('open', 'show'));
-    document.body.classList.add('avoid-clicks');
-    setTimeout(() => {
-        document.querySelectorAll('.card').forEach(card => card.classList.remove('open', 'show'));
-        document.body.classList.remove('avoid-clicks');
-    }, 5000);
+  document.querySelectorAll('.card').forEach(card => card.classList.add('open', 'show'));
+  document.body.classList.add('avoid-clicks');
+  setTimeout(() => {
+    document.querySelectorAll('.card').forEach(card => card.classList.remove('open', 'show'));
+    document.body.classList.remove('avoid-clicks');
+  }, 5000);
 };
-
 
 // Flip Cards on click
 const flipCards = card => {
-    card.classList.toggle('open');
-    card.classList.toggle('show');
+  card.classList.toggle('open');
+  card.classList.toggle('show');
 };
-
 
 // Hint - show a random card for 1 second when the user clicks on the hint icon
 // Once hint is used, decrement number of hints and update the DOM
 // Random card selection logic from https://stackoverflow.com/a/4550514
 
 const removeHint = () => {
-    hints--;
-    let hintsList = Array.from(document.querySelectorAll('.fa-lightbulb'));
-    for (let i = hintsList.length - 1; i >= 0; i--) {
-        if (!hintsList[i].classList.contains('used')) {
-            hintsList[i].classList.toggle('used');
-            break;
-        }
+  hints--;
+  let hintsList = Array.from(document.querySelectorAll('.fa-lightbulb'));
+  for (let i = hintsList.length - 1; i >= 0; i--) {
+    if (!hintsList[i].classList.contains('used')) {
+      hintsList[i].classList.toggle('used');
+      break;
     }
+  }
 };
 
 const giveHint = () => {
-    if (hints >= 1) {
-        let unmatchedCards = Array.from(document.querySelectorAll('li.card:not(.match):not(.open)'));
-        let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
-        flipCards(randomCard);
-        setTimeout(() => {
-            flipCards(randomCard);
-        }, 1000);
-        removeHint();
-    }
+  if (hints >= 1) {
+    let unmatchedCards = Array.from(document.querySelectorAll('li.card:not(.match):not(.open)'));
+    let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
+    flipCards(randomCard);
+    setTimeout(() => {
+      flipCards(randomCard);
+    }, 1000);
+    removeHint();
+  }
 };
-
 
 // Check if selected cards match
 let openCards = [];
 
 const matchCards = selectedCards => {
-    selectedCards[0].firstElementChild.className === selectedCards[1].firstElementChild.className ? (
-        selectedCards[0].classList.toggle('match'),
-        selectedCards[1].classList.toggle('match'),
-        openCards = [],
-        cardsMatch()
-    ) : (
-        setTimeout(() => {
-            flipCards(selectedCards[0]);
-            flipCards(selectedCards[1]);
-            openCards = []
-        }, 1000),
-        cardsDontMatch()
-    );
-}
+  if (selectedCards[0].firstElementChild.className === selectedCards[1].firstElementChild.className) {
+    selectedCards[0].classList.toggle('match');
+    selectedCards[1].classList.toggle('match');
+    openCards = [];
+    cardsMatch();
+  } else {
+    setTimeout(() => {
+      flipCards(selectedCards[0]);
+      flipCards(selectedCards[1]);
+      openCards = [];
+    }, 1000);
+    cardsDontMatch();
+  }
+};
 
 // If the cards match, give a bonus star for matching cards n times in a row, check if the game is won
 const cardsMatch = () => {
-    matched++;
-    matchedRow++;
-    if (matchedRow === bonusStar) {
-        if (stars < maxStars) {
-            stars++;
-            let starsList = Array.from(document.querySelectorAll('.fa-star'));
-            for (let i = 0; i < starsList.length; i++) {
-                if (starsList[i].classList.contains('lost')) {
-                    starsList[i].classList.toggle('lost');
-                    break;
-                }
-            }
-        };
-        matchedRow = 0;
+  matched++;
+  matchedRow++;
+  if (matchedRow === bonusStar) {
+    if (stars < maxStars) {
+      stars++;
+      let starsList = Array.from(document.querySelectorAll('.fa-star'));
+      for (let i = 0; i < starsList.length; i++) {
+        if (starsList[i].classList.contains('lost')) {
+          starsList[i].classList.toggle('lost');
+          break;
+        }
+      }
     }
-    if (pairs === matched) {
-        gameResult = 'Won';
-        gameWon();
-    }
+    matchedRow = 0;
+  }
+  if (pairs === matched) {
+    gameResult = 'Won';
+    gameWon();
+  }
 };
 
 // If cards do not match, remove star, check if game is over
 const cardsDontMatch = () => {
-    stars--;
-    matchedRow = 0;
-    let starsList = Array.from(document.querySelectorAll('.fa-star'));
-    for (let i = starsList.length - 1; i >= 0; i--) {
-        if (!starsList[i].classList.contains('lost')) {
-            starsList[i].classList.toggle('lost');
-            break;
-        }
+  stars--;
+  matchedRow = 0;
+  let starsList = Array.from(document.querySelectorAll('.fa-star'));
+  for (let i = starsList.length - 1; i >= 0; i--) {
+    if (!starsList[i].classList.contains('lost')) {
+      starsList[i].classList.toggle('lost');
+      break;
     }
-    if (stars === 0) {
-        gameResult = 'Lost';
-        gameOver();
-    }
+  }
+  if (stars === 0) {
+    gameResult = 'Lost';
+    gameOver();
+  }
 };
 
 // Collect final stats and add to the DOM
 const finalStats = () => {
-    document.querySelector('.final-level').innerHTML = level;
-    document.querySelector('.final-stars').innerHTML = stars;
-    document.querySelector('.final-moves').innerHTML = moves;
-    document.querySelector('.final-time').textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
-    document.querySelector('.final-hints').innerHTML = hints;
-    document.querySelector('.final-matched').innerHTML = matched;
+  document.querySelector('.final-level').innerHTML = level;
+  document.querySelector('.final-stars').innerHTML = stars;
+  document.querySelector('.final-moves').innerHTML = moves;
+  document.querySelector('.final-time').textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
+  document.querySelector('.final-hints').innerHTML = hints;
+  document.querySelector('.final-matched').innerHTML = matched;
 };
 
 // If the game is over, stop time, collect stats and display modal with the game result
 const gameWon = () => {
-    stopTime();
-    finalStats();
-    saveGameStats()
-    document.querySelector('.game-won').classList.remove('hide');
-    toggleResultModal();
+  stopTime();
+  finalStats();
+  saveGameStats();
+  document.querySelector('.game-won').classList.remove('hide');
+  toggleResultModal();
 };
 
 // If the game is over, stop time, collect stats and display modal with the game result
 const gameOver = () => {
-    stopTime();
-    finalStats();
-    saveGameStats()
-    document.querySelector('.game-over').classList.remove('hide');
-    toggleResultModal();
+  stopTime();
+  finalStats();
+  saveGameStats();
+  document.querySelector('.game-over').classList.remove('hide');
+  toggleResultModal();
 };
-
-
 
 // INITIATE THE GAME
 const startGame = level => {
-    document.querySelector('.game-over').classList.add('hide');
-    document.querySelector('.game-won').classList.add('hide');
-    stopTime();
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
-    moves = 0;
-    matched = 0;
-    matchedRow = 0;
-    setLevel(level);
-    generateCards(cards);
-    generateStars(stars);
-    generateHints(hints);
-    generateMoves();
-    startTime();
-    showCards();
+  document.querySelector('.game-over').classList.add('hide');
+  document.querySelector('.game-won').classList.add('hide');
+  stopTime();
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+  moves = 0;
+  matched = 0;
+  matchedRow = 0;
+  setLevel(level);
+  generateCards(cards);
+  generateStars(stars);
+  generateHints(hints);
+  generateMoves();
+  startTime();
+  showCards();
 };
-
-
 
 // EVENT LISTENERS
 
 // Select game level
 document.querySelector('#easy-level').addEventListener('click', () => {
-    toggleWelcomeModal();
-    level = 'Easy';
-    startGame(level);
+  toggleWelcomeModal();
+  level = 'Easy';
+  startGame(level);
 });
 
 document.querySelector('#medium-level').addEventListener('click', () => {
-    toggleWelcomeModal();
-    level = 'Medium';
-    startGame(level);
+  toggleWelcomeModal();
+  level = 'Medium';
+  startGame(level);
 });
 
 document.querySelector('#hard-level').addEventListener('click', () => {
-    toggleWelcomeModal();
-    level = 'Hard';
-    startGame(level);
+  toggleWelcomeModal();
+  level = 'Hard';
+  startGame(level);
 });
 
 // Cards
 // Some inspiration from https://matthewcranford.com/memory-game-walkthrough-part-3-matching-pairs/
-cardsContainer.addEventListener('click', () => {
-    const clickTarget = event.target;
-    if (clickTarget.classList.contains('card') &&
+cardsContainer.addEventListener('click', e => {
+  const clickTarget = e.target;
+  if (clickTarget.classList.contains('card') &&
         !clickTarget.classList.contains('match') &&
         (openCards.length < 2) &&
         !openCards.includes(clickTarget)
-    ) {
-        flipCards(clickTarget);
-        openCards.push(clickTarget);
-        if (openCards.length === 2) {
-            addMove();
-            matchCards(openCards);
-        }
+  ) {
+    flipCards(clickTarget);
+    openCards.push(clickTarget);
+    if (openCards.length === 2) {
+      addMove();
+      matchCards(openCards);
     }
+  }
 });
 
 // Hints
@@ -477,23 +451,23 @@ hintsContainer.addEventListener('click', () => giveHint());
 
 // Toogle game won / over modal
 document.querySelectorAll('.close').forEach(e => {
-    e.addEventListener('click', () => {
-        toggleResultModal();
-        startGame(level);
-    });
+  e.addEventListener('click', () => {
+    toggleResultModal();
+    startGame(level);
+  });
 });
 
 // Scoreboard show
 document.querySelectorAll('.show-score').forEach(e => {
-    e.addEventListener('click', () => {
-        toggleScoreModal();
-    });
+  e.addEventListener('click', () => {
+    toggleScoreModal();
+  });
 });
 
 // Scoreboard hide
 document.querySelector('.show-score-hide').addEventListener('click', () => {
-    toggleResultModal();
-    toggleScoreModal();
+  toggleResultModal();
+  toggleScoreModal();
 });
 
 // Restart game button
@@ -502,5 +476,5 @@ restartContainer.addEventListener('click', () => startGame(level));
 
 // Change level button
 document.querySelector('.level-button').addEventListener('click', () => {
-    toggleWelcomeModal();
+  toggleWelcomeModal();
 });
