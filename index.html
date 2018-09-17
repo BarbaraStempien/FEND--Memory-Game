@@ -39,7 +39,7 @@
                 <button class="level-button">
                     Change level
                 </button>
-                <button class="score-button show-score">Show scores</button>
+                <button class="main-show-scoreboard">Show scores</button>
             </div>
 
         </section>
@@ -64,9 +64,9 @@
                 <p>
                     Select level:
                 </p>
-                <button id="easy-level" class="modal-button start-game">Easy</button>
-                <button id="medium-level" class="modal-button start-game">Medium</button>
-                <button id="hard-level" class="modal-button start-game">Hard</button>
+                <button id="easy-level" class="modal-button ">Easy</button>
+                <button id="medium-level" class="modal-button ">Medium</button>
+                <button id="hard-level" class="modal-button ">Hard</button>
             </footer>
         </div>
     </div>
@@ -77,7 +77,7 @@
                 <h2 class="modal-header">Your scores</h2>
             </header>
             <section class="modal-description">
-                <table class="scoreboard">
+                <table class="scoreboard-table">
                     <thead>
                         <tr class="scoreboard-header">
                             <th>Level</th>
@@ -95,7 +95,7 @@
         </table>
         </section>
         <footer class="modal-footer">
-            <button class="modal-button show-score">Back</button>
+            <button class="scoreboard-close">Back</button>
         </footer>
     </div>
     </div>
@@ -104,9 +104,6 @@
 
     <div class="modal game-result hide">
         <div class="modal-content">
-            <button class="modal-x close">
-                <i class="fas fa-times"></i>
-            </button>
             <header>
                 <h2 class="modal-header game-over hide">Game-over!</h2>
                 <h2 class="modal-header game-won hide">Congratulations! You won!</h2>
@@ -132,8 +129,8 @@
                 </div>
             </section>
             <footer class="modal-footer">
-                <button class="modal-button close">Play again</button>
-                <button class="modal-button show-score-hide">Show scores</button>
+                <button class="modal-button play-again">Play again</button>
+                <button class="modal-button results-show-scoreboard">Show scores</button>
             </footer>
         </div>
     </div>

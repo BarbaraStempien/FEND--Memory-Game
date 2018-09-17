@@ -199,16 +199,6 @@ body.modal-open {
     transform: translate(-50%, -50%);
 }
 
-.modal-x {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: transparent;
-    color: #000;
-    border: none;
-    cursor: pointer;
-}
-
 .modal-header {
     text-align: center;
     margin: 0;
@@ -225,7 +215,8 @@ body.modal-open {
     align-items: center;
 }
 
-.score-button,
+.main-show-scoreboard,
+.scoreboard-close,
 .level-button,
 .modal-button {
     padding: 10px 20px;

@@ -450,24 +450,39 @@ cardsContainer.addEventListener('click', e => {
 hintsContainer.addEventListener('click', () => giveHint());
 
 // Toogle game won / over modal
-document.querySelectorAll('.close').forEach(e => {
-  e.addEventListener('click', () => {
+const playAgainButton = document.querySelector('.play-again');
+playAgainButton.addEventListener('click', () => {
     toggleResultModal();
     startGame(level);
   });
+
+// Scoreboard
+const mainShowScoreboardButton = document.querySelector('.main-show-scoreboard');
+const resultsShowScoreboardButton = document.querySelector('.results-show-scoreboard');
+const scoreboardCloseButton = document.querySelector('.scoreboard-close');
+
+// Scoreboard show button - main screen
+mainShowScoreboardButton.addEventListener('click', () => {
+  toggleScoreModal();
 });
 
-// Scoreboard show
-document.querySelectorAll('.show-score').forEach(e => {
-  e.addEventListener('click', () => {
+// Scoreboard show button -  game won / over modal
+resultsShowScoreboardButton.addEventListener('click', () => {
+  scoreboardCloseButton.classList.add('back-results');
+  toggleResultModal();
     toggleScoreModal();
   });
-});
 
-// Scoreboard hide
-document.querySelector('.show-score-hide').addEventListener('click', () => {
+// Scoreboard back button
+scoreboardCloseButton.addEventListener('click', e => {
+  const clickTarget = e.target;
+  if (clickTarget.classList.contains('back-results')) {
+    toggleScoreModal();
   toggleResultModal();
+    clickTarget.classList.remove('back-results');
+  } else {
   toggleScoreModal();
+  }
 });
 
 // Restart game button
