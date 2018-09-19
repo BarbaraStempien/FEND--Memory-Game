@@ -198,18 +198,9 @@ body {
 }
 
 .deck .card-wrapper {
+    flex: 0 0 16.6%;
     display: flex;
     justify-content: center;
-}
-
-.deck .card-wrapper {
-    flex: 0 0 16.6%;
-}
-
-@media screen and (min-width: 1024px) {
-    .deck .card-wrapper.Hard {
-        flex: 1 0 20%;
-    }
 }
 
 .deck .card {

@@ -39,7 +39,7 @@ const gameLevels = {
     bonusStar: 3
   },
   Hard: {
-    cards: 20,
+    cards: 18,
     stars: 3,
     maxStars: 3,
     hints: 1,
@@ -105,7 +105,7 @@ function shuffle (array) {
 
 // Generate Cards and add to the DOM, some inspiration from https://www.youtube.com/watch?v=_rUH-sEs68Y
 const cardsContainer = document.querySelector('.deck');
-const cardsTemplate = img => `<li class="card-wrapper ${level}"><div class="card"><i class="fa ${img}"></i></div></li>`;
+const cardsTemplate = img => `<li class="card-wrapper"><div class="card"><i class="fa ${img}"></i></div></li>`;
 
 const generateCards = cards => {
   let shuffledImages = shuffle(cardsImages.slice(0, cards));
@@ -417,7 +417,7 @@ const toggleHamburger = () => { navbarSettings.classList.toggle('navbar-list-sho
 
 const humburgerButton = document.querySelector('.navbar-hamburger');
 humburgerButton.addEventListener('click', () => {
-  toggleHamburger()
+  toggleHamburger();
 });
 
 // Select game level
