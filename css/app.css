@@ -173,6 +173,7 @@ body {
 */
 .avoid-clicks {
     pointer-events: none;
+    cursor: not-allowed !important;
 }
 
 /*

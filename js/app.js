@@ -259,12 +259,13 @@ const toggleScoreModal = () => {
 // GAME LOGIC
 
 // Show Cards for the first 5 seconds of the game
+const htmlElement = document.querySelector('html');
 const showCards = () => {
   document.querySelectorAll('.card').forEach(card => card.classList.add('open', 'show'));
-  document.body.classList.add('avoid-clicks');
+  htmlElement.classList.add('avoid-clicks');
   setTimeout(() => {
     document.querySelectorAll('.card').forEach(card => card.classList.remove('open', 'show'));
-    document.body.classList.remove('avoid-clicks');
+    htmlElement.classList.remove('avoid-clicks');
   }, 5000);
 };
 
