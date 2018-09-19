@@ -116,7 +116,7 @@ const generateCards = cards => {
 // GENERATE STARS
 
 // Generate Stars and add to the DOM
-const starsContainer = document.querySelector('.stars');
+const starsContainer = document.querySelector('.stars-wrapper');
 const starsTemplate = '<li><i class="fa fa-star"></i></li>';
 
 const generateStars = stars => {
@@ -165,7 +165,7 @@ const addMove = () => {
 // CREATE HINTS
 
 // Generate Hints and add to the DOM
-const hintsContainer = document.querySelector('.hints');
+const hintsContainer = document.querySelector('.hints-wrapper');
 const hintsTemplate = '<li><i class="fa fa-lightbulb"></i></li>';
 
 const generateHints = hints => {
@@ -408,7 +408,16 @@ const startGame = level => {
   showCards();
 };
 
+// Toggle humburger menu
+const navbarSettings = document.querySelector('.navbar-settings');
+const toggleHamburger = () => { navbarSettings.classList.toggle('navbar-list-show'); };
+
 // EVENT LISTENERS
+
+const humburgerButton = document.querySelector('.navbar-hamburger');
+humburgerButton.addEventListener('click', () => {
+  toggleHamburger()
+});
 
 // Select game level
 const easyLevelButton = document.querySelector('#easy-level');
@@ -490,7 +499,7 @@ scoreboardCloseButton.addEventListener('click', e => {
 });
 
 // Restart game button
-const restartGameButton = document.querySelector('.restart');
+const restartGameButton = document.querySelector('.restart-button');
 restartGameButton.addEventListener('click', () => startGame(level));
 
 // Change level button

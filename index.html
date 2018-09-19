@@ -12,41 +12,46 @@
 </head>
 
 <body class="modal-open">
-
     <div class="container">
-        <header>
-            <h1>Matching Game</h1>
-        </header>
-
-        <section class="score-panel">
-            <ul class="stars">
+        <div class="navbar">
+            <div class="navbar-statistics">
+                <div class="moves-wrapper" title="Moves count">
+                    Moves: <span class="moves">0</span>
+                </div>
+                <div class="time-wrapper" title="Time passed">
+                    Time: <span class="time">00:00:00</span>
+                </div>
+            </div>
+            <div class="navbar-hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="navbar-settings">
+                <div class="navbar-button restart-button" title="Click to restart the game">
+                    <i class="fa fa-redo"></i>
+                    Restart
+                </div>
+                <div class="navbar-button level-button" title="Click to change the difficulty level">
+                    <i class="fas fa-cog"></i>
+                    Change Level
+                </div>
+                <div class="navbar-button main-show-scoreboard scoreboard-button" title="Click to display scoreboard">
+                    <i class="fas fa-crown"></i>
+                    Show Scores
+                </div>
+            </nav>
+        </div>
+        <section class="stars-hints-wrapper">
+            <ul class="stars-wrapper" title="Stars left">
             </ul>
-
-            <span class="moves">0</span> Moves
-
-            <div class="restart">
-                <i class="fa fa-redo"></i>
-            </div>
-
-            <div class="timer">
-                Time: <span class="time">00:00:00</span>
-            </div>
-
-            <ul class="hints">
+            <ul class="hints-wrapper" title="Click to get a hint">
             </ul>
-
-            <div class="panel-button">
-                <button class="level-button">
-                    Change level
-                </button>
-                <button class="main-show-scoreboard">Show scores</button>
-            </div>
-
         </section>
 
-        <ul class="deck">
-        </ul>
+        <section class="panel-cards">
+            <ul class="deck"></ul>
+        </section>
     </div>
+
 
     <div class="modal welcome">
         <div class="modal-content">
@@ -64,9 +69,9 @@
                 <p>
                     Select level:
                 </p>
-                <button id="easy-level" class="modal-button ">Easy</button>
-                <button id="medium-level" class="modal-button ">Medium</button>
-                <button id="hard-level" class="modal-button ">Hard</button>
+                <button id="easy-level" class="button-primary ">Easy</button>
+                <button id="medium-level" class="button-primary ">Medium</button>
+                <button id="hard-level" class="button-primary ">Hard</button>
             </footer>
         </div>
     </div>
@@ -95,11 +100,10 @@
         </table>
         </section>
         <footer class="modal-footer">
-            <button class="scoreboard-close">Back</button>
+            <button class="scoreboard-close button-primary">Back</button>
         </footer>
     </div>
     </div>
-
 
 
     <div class="modal game-result hide">

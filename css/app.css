@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 *,
@@ -24,21 +25,137 @@ body {
 
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    flex-flow: row wrap;
+    text-align: center;
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+.container>* {
+    padding: 0.625rem;
+    flex: 1 100%;
+}
+
+/* STATISTICS AND SETTINGS PANEL */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    color: white;
+}
+
+.navbar-hamburger {
+    display: none;
+}
+
+.navbar-statistics,
+.navbar-settings {
+    display: flex;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+.navbar-button {
+    padding-right: 0.5rem;
+}
+
+.moves-wrapper,
+.time-wrapper {
+    padding: 1rem;
+    flex: none;
+    cursor: default;
+}
+
+.navbar-button {
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.navbar-button > i {
+    padding-right: 5px;
+}
+
+
+/* STARS AND HINTS */
+
+.stars-hints-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 3rem 0;
+}
+
+.hints-wrapper,
+.stars-wrapper {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.stars-wrapper li,
+.hints-wrapper li {
+    display: inline-block;
+    list-style: none;
+    font-size: 1.5rem;
+    padding: 2px;
+    color: #ffbf00;
+}
+
+.hints-wrapper li i {
+    cursor: pointer;
+    font-size: 1.625rem;
+    padding: 0.1875rem;
+}
+
+.lost,
+.used {
+    color: #808080;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .navbar-settings,
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar-hamburger {
+        align-self: flex-end;
+        display: initial;
+        position: absolute;
+        cursor: pointer;
+        padding: 1rem 1rem;
+    }
+
+    .navbar-settings {
+        display: none;
+    }
+
+    .navbar-list-show {
+        display: flex;
+    }
+
+    .moves-wrapper,
+    .time-wrapper {
+        flex: 1 1 50%;
+    }
+
+    .stars-hints-wrapper {
+        padding: 1rem 1rem 0;
+    }
+}
+
+/* 
+* Prevent clicks when cards are displayed for 5 seconds
+*/
+.avoid-clicks {
+    pointer-events: none;
 }
 
 /*
  * Styles for the deck of cards
  */
 
-.deck {
+ .deck {
     width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
@@ -49,7 +166,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 0 auto;
 }
 
 .deck .card {
@@ -82,64 +199,6 @@ h1 {
     font-size: 33px;
 }
 
-/*
- * Styles for the Score Panel
- */
-
-.score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
-}
-
-.score-panel .stars,
-.score-panel .hints {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
-    color: #ffbf00;
-}
-
-.score-panel .stars li,
-.score-panel .hints li {
-    list-style: none;
-    display: inline-block;
-    padding: 2px;
-}
-
-.score-panel .stars li i,
-.score-panel .hints li i {
-    width: 18px;
-    text-align: center;
-}
-
-.score-panel .hints li {
-    cursor: pointer;
-}
-
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
-}
-
-.score-panel .timer {
-    float: right;
-    display: inline-block;
-    margin: 0 5px 0 0;
-}
-
-.lost,
-.used {
-    color: #808080;
-}
-
-/* 
-* Prevent clicks when cards are displayed for 5 seconds
-*/
-.avoid-clicks {
-    pointer-events: none;
-}
 
 /*
  * Styles for the Modal Panel
@@ -213,16 +272,6 @@ body.modal-open {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.main-show-scoreboard,
-.scoreboard-close,
-.level-button,
-.modal-button {
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 0 10px;
 }
 
 .modal-description {
