@@ -106,9 +106,11 @@ body {
 /* STARS AND HINTS */
 
 .stars-hints-wrapper {
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 3rem 0;
+    padding: 1rem 3rem 1rem;
+    margin: 0 auto;
 }
 
 .hints-wrapper,
@@ -138,8 +140,7 @@ body {
     color: #808080;
 }
 
-@media only screen and (max-width: 768px) {
-
+@media only screen and (max-width: 800px) {
     .navbar-settings,
     .navbar {
         flex-direction: column;
@@ -165,10 +166,6 @@ body {
     .time-wrapper {
         flex: 1 1 50%;
     }
-
-    .stars-hints-wrapper {
-        padding: 1rem 1rem 0;
-    }
 }
 
 /* 
@@ -182,21 +179,43 @@ body {
  * Styles for the deck of cards
  */
 
+ .panel-cards {
+    padding: 0 2rem 2rem;
+ }
+
  .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    border-radius: 10px;
     margin: 0 auto;
+    padding: 0;
+}
+
+.deck .card-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.deck .card-wrapper {
+    flex: 0 0 16.6%;
+}
+
+@media screen and (min-width: 1024px) {
+    .deck .card-wrapper.Hard {
+        flex: 1 0 20%;
+    }
 }
 
 .deck .card {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    justify-content: center;
     height: 125px;
     width: 125px;
     background: #2e3d49;
@@ -204,9 +223,6 @@ body {
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 

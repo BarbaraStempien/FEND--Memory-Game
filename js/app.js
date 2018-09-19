@@ -105,7 +105,7 @@ function shuffle (array) {
 
 // Generate Cards and add to the DOM, some inspiration from https://www.youtube.com/watch?v=_rUH-sEs68Y
 const cardsContainer = document.querySelector('.deck');
-const cardsTemplate = img => `<li class="card"><i class="fa ${img}"></i></li>`;
+const cardsTemplate = img => `<li class="card-wrapper ${level}"><div class="card"><i class="fa ${img}"></i></div></li>`;
 
 const generateCards = cards => {
   let shuffledImages = shuffle(cardsImages.slice(0, cards));
