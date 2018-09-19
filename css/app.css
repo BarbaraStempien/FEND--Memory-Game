@@ -71,10 +71,37 @@ body {
     cursor: pointer;
 }
 
-.navbar-button > i {
-    padding-right: 5px;
+.navbar-button > span {
+    padding-left: 4px;
 }
 
+.navbar-button:hover > i.fa-redo,
+.navbar-button:hover > i.fa-cog {
+    animation: fa-spin 2s 1;
+}
+
+.navbar-button:hover > i.fa-crown {
+    animation: golden 2s 1;
+}
+
+@keyframes golden {
+    0% {
+      color: #fff;
+    }
+    100% {
+      color: #ffbf00;
+    }
+  }
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(1turn)
+    }
+}
 
 /* STARS AND HINTS */
 
