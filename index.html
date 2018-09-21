@@ -97,13 +97,12 @@
                     </thead>
                     <tbody class="scoreboard-results">
                     </tbody>
+                </table>
+            </section>
+            <section class="modal-buttons-wrapper">
+                <button class="scoreboard-close button-modal">Back</button>
+            </section>
         </div>
-        </table>
-        </section>
-        <section class="modal-buttons-wrapper">
-            <button class="scoreboard-close button-modal">Back</button>
-        </section>
-    </div>
     </div>
 
     <!-- Game won! Game over! modal -->
@@ -113,25 +112,22 @@
                 <h2 class="modal-header game-over hide">Game-over!</h2>
                 <h2 class="modal-header game-won hide">Congratulations! You won!</h2>
             </header>
-            <section class="modal-statistics">
-                <div>
-                    Level: <span class="final-level">0</span>
-                </div>
-                <div>
-                    Pairs found: <span class="final-matched">0</span>
-                </div>
-                <div>
-                    Stars left: <span class="final-stars">0</span>
-                </div>
-                <div>
-                    Hints left: <span class="final-hints">0</span>
-                </div>
-                <div>
-                    Moves done: <span class="final-moves">0</span>
-                </div>
-                <div>
-                    Time passed: <span class="final-time">00:00:00</span>
-                </div>
+            <section class="modal-description">
+                <table class="scoreboard-table">
+                    <thead>
+                        <tr class="scoreboard-header">
+                            <th>Level</th>
+                            <th>Result</th>
+                            <th>Pairs Matched</th>
+                            <th>Stars Left</th>
+                            <th>Moves Done</th>
+                            <th>Hints Left</th>
+                            <th>Time Passed</th>
+                        </tr>
+                    </thead>
+                    <tbody class="final-result">
+                    </tbody>
+                </table>
             </section>
             <section class="modal-buttons-wrapper">
                 <button class="modal-button play-again">Play again</button>

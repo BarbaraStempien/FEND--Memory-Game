@@ -173,7 +173,7 @@ const generateHints = hints => {
   hintsContainer.innerHTML = hintsHTML;
 };
 
-// CREATE SCOREBOARD
+// CREATE SCOREBOARDs
 
 // Save current game statistics
 function currentGameStats () {
@@ -230,6 +230,23 @@ const generateScoreboard = () => {
     let scoresHTML = storageStats.slice(storageStats.length - 5).map(record => scoreboardTemplate(record.level, record.result, record.matched, record.stars, record.moves, record.hints, record.time));
     scoreboardContainer.innerHTML = scoresHTML.reverse().join('');
   }
+};
+
+// Generate result for the current game and add to the DOM
+const resultContainer = document.querySelector('.final-result');
+const generateFinalResult = () => {
+  let finalResult = currentGameStats();
+  currentGameID = Object.keys(finalResult)[0];
+  let finalResultHTML = scoreboardTemplate(
+    finalResult[currentGameID].level,
+    finalResult[currentGameID].result,
+    finalResult[currentGameID].matched,
+    finalResult[currentGameID].stars,
+    finalResult[currentGameID].moves,
+    finalResult[currentGameID].hints,
+    finalResult[currentGameID].time
+  );
+  resultContainer.innerHTML = finalResultHTML;
 };
 
 // MODALS
@@ -361,21 +378,11 @@ const cardsDontMatch = () => {
   }
 };
 
-// Collect final stats and add to the DOM
-const finalStats = () => {
-  document.querySelector('.final-level').innerHTML = level;
-  document.querySelector('.final-stars').innerHTML = stars;
-  document.querySelector('.final-moves').innerHTML = moves;
-  document.querySelector('.final-time').textContent = padTime(hours) + ':' + padTime(minutes) + ':' + padTime(seconds);
-  document.querySelector('.final-hints').innerHTML = hints;
-  document.querySelector('.final-matched').innerHTML = matched;
-};
-
 // If the game is over, stop time, collect stats and display modal with the game result
 const gameWon = () => {
   stopTime();
-  finalStats();
   saveGameStats();
+  generateFinalResult();
   document.querySelector('.game-won').classList.remove('hide');
   toggleResultModal();
 };
@@ -383,8 +390,8 @@ const gameWon = () => {
 // If the game is over, stop time, collect stats and display modal with the game result
 const gameOver = () => {
   stopTime();
-  finalStats();
   saveGameStats();
+  generateFinalResult();
   document.querySelector('.game-over').classList.remove('hide');
   toggleResultModal();
 };

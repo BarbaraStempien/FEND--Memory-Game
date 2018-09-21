@@ -323,7 +323,7 @@ body.modal-open {
     text-align: center;
 }
 
-/* scoreboard */
+/* scoreboards */
 
 .scoreboard-table {
     border-collapse: collapse;
@@ -335,10 +335,12 @@ body.modal-open {
     padding: 0 0.625rem;
 }
 
+.final-result > tr> td,
 .scoreboard-results > tr > td {
     padding: 0.625rem;
 }
 
+.final-result > tr:hover,
 .scoreboard-results > tr:hover {
     background: #2e3d49;
 }
