@@ -13,7 +13,7 @@
 
 <body class="modal-open">
     <div class="container">
-        <div class="navbar">
+        <nav class="navbar">
             <div class="navbar-statistics">
                 <div class="moves-wrapper" title="Moves count">
                     Moves: <span class="moves">0</span>
@@ -25,7 +25,7 @@
             <div class="navbar-hamburger">
                 <i class="fas fa-bars"></i>
             </div>
-            <nav class="navbar-settings">
+            <div class="navbar-settings">
                 <div class="navbar-button restart-button" title="Click to restart the game">
                     <i class="fa fa-redo"></i>
                     <span>Restart</span>
@@ -38,8 +38,8 @@
                     <i class="fas fa-crown"></i>
                     <span>Show Scores</span>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
         <section class="stars-hints-wrapper">
             <ul class="stars-wrapper" title="Stars left">
             </ul>
@@ -47,12 +47,12 @@
             </ul>
         </section>
 
-        <section class="panel-cards">
+        <section class="cards-wrapper">
             <ul class="deck"></ul>
         </section>
     </div>
 
-
+    <!-- Welcome / change level modal -->
     <div class="modal welcome">
         <div class="modal-content">
             <header>
@@ -65,17 +65,18 @@
                     A user wins once all cards have successfully been matched.
                 </p>
             </section>
-            <footer class="modal-footer">
+            <section class="modal-buttons-wrapper">
                 <p>
                     Select level:
                 </p>
-                <button id="easy-level" class="button-primary ">Easy</button>
-                <button id="medium-level" class="button-primary ">Medium</button>
-                <button id="hard-level" class="button-primary ">Hard</button>
-            </footer>
+                <button id="easy-level" class="button-modal ">Easy</button>
+                <button id="medium-level" class="button-modal ">Medium</button>
+                <button id="hard-level" class="button-modal ">Hard</button>
+            </section>
         </div>
     </div>
 
+    <!-- Scoreboard -->
     <div class="modal score hide">
         <div class="modal-content">
             <header>
@@ -99,20 +100,20 @@
         </div>
         </table>
         </section>
-        <footer class="modal-footer">
-            <button class="scoreboard-close button-primary">Back</button>
-        </footer>
+        <section class="modal-buttons-wrapper">
+            <button class="scoreboard-close button-modal">Back</button>
+        </section>
     </div>
     </div>
 
-
+    <!-- Game won! Game over! modal -->
     <div class="modal game-result hide">
         <div class="modal-content">
             <header>
                 <h2 class="modal-header game-over hide">Game-over!</h2>
                 <h2 class="modal-header game-won hide">Congratulations! You won!</h2>
             </header>
-            <section class="modal-stats">
+            <section class="modal-statistics">
                 <div>
                     Level: <span class="final-level">0</span>
                 </div>
@@ -132,10 +133,10 @@
                     Time passed: <span class="final-time">00:00:00</span>
                 </div>
             </section>
-            <footer class="modal-footer">
+            <section class="modal-buttons-wrapper">
                 <button class="modal-button play-again">Play again</button>
                 <button class="modal-button results-show-scoreboard">Show scores</button>
-            </footer>
+            </section>
         </div>
     </div>
 

@@ -168,19 +168,12 @@ body {
     }
 }
 
-/* 
-* Prevent clicks when cards are displayed for 5 seconds
-*/
-.avoid-clicks {
-    pointer-events: none;
-    cursor: not-allowed !important;
-}
 
 /*
  * Styles for the deck of cards
  */
 
- .panel-cards {
+ .cards-wrapper {
     padding: 0 2rem 2rem;
  }
 
@@ -248,7 +241,7 @@ body {
 
 
 /*
- * Styles for the Modal Panel
+ * Styles for the Modals
  */
 
 @-webkit-keyframes fadeIn {
@@ -299,7 +292,7 @@ body.modal-open {
     background-color: #fff;
     border-radius: 4px;
     padding: 40px;
-    max-width: 600px;
+    max-width: 800px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -311,11 +304,16 @@ body.modal-open {
     margin-bottom: 20px;
 }
 
-.modal-stats {
+.modal-statistics {
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
-.modal-footer {
+.modal-statistics span {
+    font-weight: 500;
+}
+
+.modal-buttons-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -323,4 +321,32 @@ body.modal-open {
 
 .modal-description {
     text-align: center;
+}
+
+/* scoreboard */
+
+.scoreboard-table {
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.scoreboard-header > th {
+    padding: 0 0.625rem;
+}
+
+.scoreboard-results > tr > td {
+    padding: 0.625rem;
+}
+
+.scoreboard-results > tr:hover {
+    background: #2e3d49;
+}
+
+/* 
+* Prevent clicks when cards are displayed for 5 seconds
+*/
+.avoid-clicks {
+    pointer-events: none;
+    cursor: not-allowed !important;
 }
