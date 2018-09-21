@@ -234,6 +234,18 @@ body {
     font-size: 33px;
 }
 
+.deck .card.no-match {
+    background: #FF5555;
+}
+
+/* blinker from https://stackoverflow.com/a/16344548/7382214 */
+@keyframes blink { to {opacity: 1; } }
+
+.cards-blink i {
+    opacity: 0 !important;
+    animation: blink 1s linear infinite alternate;  
+}
+
 
 /*
  * Styles for the Modal Panel
