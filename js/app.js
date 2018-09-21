@@ -292,7 +292,7 @@ const removeHint = () => {
 
 const giveHint = () => {
   if (hints >= 1) {
-    let unmatchedCards = Array.from(document.querySelectorAll('li.card:not(.match):not(.open)'));
+    let unmatchedCards = Array.from(document.querySelectorAll('div.card:not(.match):not(.open)'));
     let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
     flipCards(randomCard);
     setTimeout(() => {
