@@ -319,9 +319,64 @@ body.modal-open {
     align-items: center;
 }
 
-.modal-description {
-    text-align: center;
+/* buttons from https://codepen.io/cheeriottis/pen/inluv */
+.button-modal {
+    position: relative;
+    padding: 0.5rem 2rem;
+    margin: 0px 0.625rem 0.625rem 0px;
+    float: left;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1rem;
+    color: #FFF;
+    text-decoration: none;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    cursor: pointer;
 }
+
+.hard {
+    background-color: #E74C3C;
+    border-bottom: 5px solid #BD3E31;
+    text-shadow: 0px -2px #BD3E31;
+}
+
+.hard:hover {
+    background-color: #BD3E31;
+    border-bottom: 5px solid #66221b;
+}
+
+.medium {
+    background-color: #F2CF66;
+    border-bottom: 5px solid #D1B358;
+    text-shadow: 0px -2px #D1B358;
+}
+
+.medium:hover {
+    background-color: #D1B358;
+    border-bottom: 5px solid #87743a;
+}
+
+.easy {
+    background-color: #82BF56;
+    border-bottom: 5px solid #669644;
+    text-shadow: 0px -2px #669644;
+}
+
+.easy:hover {
+    background-color:  #669644;
+    border-bottom: 5px solid #41602b;
+}
+
+.button-modal:active,
+.button-modal:focus {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    border-bottom: 1px solid;
+    outline: none;
+}
+
 
 /* scoreboards */
 
