@@ -43,7 +43,7 @@ const gameLevels = {
     stars: 3,
     maxStars: 3,
     hints: 1,
-    pairs: 10,
+    pairs: 9,
     bonusStar: 4
   }
 };
