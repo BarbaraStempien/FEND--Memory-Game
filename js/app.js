@@ -202,11 +202,9 @@ const saveGameStats = () => {
   if ('GameStats' in window.localStorage) {
     storageStats = JSON.parse(window.localStorage.getItem('GameStats'));
     historicalGameIDs = Object.keys(storageStats).map(Number);
-    currentGameID = Math.max(...historicalGameIDs) + 1;
+    currentGameID = Math.max.apply(null, historicalGameIDs) + 1;
     gameScore = currentGameStats();
-    storageStats = { ...storageStats,
-      ...gameScore
-    };
+    storageStats = Object.assign(gameScore, storageStats);
   } else {
     currentGameID = 1;
     storageStats = currentGameStats();
