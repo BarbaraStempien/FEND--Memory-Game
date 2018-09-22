@@ -34,6 +34,10 @@ body {
     flex: 1 100%;
 }
 
+.hide {
+    display: none;
+}
+
 /* STATISTICS AND SETTINGS PANEL */
 
 .navbar {
@@ -71,27 +75,28 @@ body {
     cursor: pointer;
 }
 
-.navbar-button > span {
+.navbar-button>span {
     padding-left: 4px;
 }
 
-.navbar-button:hover > i.fa-redo,
-.navbar-button:hover > i.fa-cog {
+.navbar-button:hover>i.fa-redo,
+.navbar-button:hover>i.fa-cog {
     animation: fa-spin 2s 1;
 }
 
-.navbar-button:hover > i.fa-crown {
+.navbar-button:hover>i.fa-crown {
     animation: golden 2s 1;
 }
 
 @keyframes golden {
     0% {
-      color: #fff;
+        color: #fff;
     }
+
     100% {
-      color: #ffbf00;
+        color: #ffbf00;
     }
-  }
+}
 
 @keyframes fa-spin {
     0% {
@@ -141,6 +146,7 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
+
     .navbar-settings,
     .navbar {
         flex-direction: column;
@@ -173,11 +179,11 @@ body {
  * Styles for the deck of cards
  */
 
- .cards-wrapper {
+.cards-wrapper {
     padding: 0 2rem 2rem;
- }
+}
 
- .deck {
+.deck {
     max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
@@ -232,16 +238,20 @@ body {
 }
 
 /* blinker from https://stackoverflow.com/a/16344548/7382214 */
-@keyframes blink { to {opacity: 1; } }
+@keyframes blink {
+    to {
+        opacity: 1;
+    }
+}
 
 .cards-blink i {
     opacity: 0 !important;
-    animation: blink 1s linear infinite alternate;  
+    animation: blink 1s linear infinite alternate;
 }
 
 
 /*
- * Styles for the Modals
+ * Generic styles for all modals
  */
 
 @-webkit-keyframes fadeIn {
@@ -279,12 +289,9 @@ body {
     animation-name: fadeIn;
 }
 
+/* hide scrollbar when modal is open */
 body.modal-open {
     overflow: hidden;
-}
-
-.hide {
-    display: none;
 }
 
 .modal-content {
@@ -304,13 +311,8 @@ body.modal-open {
     margin-bottom: 20px;
 }
 
-.modal-statistics {
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.modal-statistics span {
-    font-weight: 500;
+.modal-description {
+    text-align: center;
 }
 
 .modal-buttons-wrapper {
@@ -412,6 +414,7 @@ body.modal-open {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
 
 /* 
 * Prevent clicks when cards are displayed for 5 seconds
