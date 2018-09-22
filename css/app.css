@@ -18,11 +18,10 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png');
+    background-image: url(/img/Rainbow.svg);
     /* Background pattern from Free Vector Graphics by vecteezy.com */
     font-family: 'Pacifico', cursive;
     color: #2e3d49;
-    background-image: url(/img/Rainbow.svg);
     background-size: cover;
     background-position: top center;
     background-position-x: center;
@@ -51,7 +50,8 @@ body {
     justify-content: space-between;
     padding: 0;
     color: white;
-    text-shadow: 0px -2px #000;
+    text-shadow: 1px 1px #000;
+    font-size: 1.2rem;
 }
 
 .navbar-hamburger {
@@ -125,7 +125,7 @@ body {
 .lost,
 .used {
     animation: grey-out 0.3s linear 2 alternate;
-    color: #808080;
+    color: #657a7b;
 }
 
 @keyframes grey-out {
@@ -134,7 +134,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 880px) {
 
     .navbar-settings,
     .navbar {
@@ -204,32 +204,10 @@ body {
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    transition: opacity 2s;
 }
 
-.deck .card:hover {
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5)
-}
-
-.deck .card.open {
-    transform: rotateY(0);
-    background: #02b3e4;
-    cursor: default;
-}
-
-.deck .card.show {
-    font-size: 33px;
-}
-
-.deck .card.match {
-    cursor: default;
-    background: #02ccba;
-    font-size: 33px;
-}
-
-.deck .card.no-match {
-    background: #FF5555;
-}
-
+/* show blinking icons */
 /* blinker from https://stackoverflow.com/a/16344548/7382214 */
 @keyframes blink {
     to {
@@ -242,6 +220,123 @@ body {
     animation: blink 1s linear infinite alternate;
 }
 
+/* icons colors */
+.deck .fa {
+    text-shadow: 1px 1px #000;
+}
+
+.deck .fa-crown {
+    color: #f19d26;
+}
+
+.deck .fa-bolt {
+    color: #ffc470;
+}
+
+.deck .fa-sun {
+    color: #fa9164;
+}
+
+.deck .fa-leaf {
+    color: #64a956;
+}
+
+.deck .fa-heart {
+    color: #e24e54;
+}
+
+.deck .fa-frog {
+    color: #6c60af;
+}
+
+.deck .fa-gem {
+    color: #4ebefd;
+}
+
+.deck .fa-paw {
+    color: #8a2020;
+}
+
+.deck .fa-moon {
+    color: #797979;
+}
+
+/* style for matched and not matched cards */
+.deck .card:not(.match):hover {
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5)
+}
+
+.deck .card.show {
+    font-size: 33px;
+    cursor: default;
+    font-size: 33px;
+}
+
+.deck .card.match {
+    animation: shake-yes 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    cursor: default;
+    font-size: 33px;
+    opacity: 0.5;
+}
+
+.deck .card.no-match {
+    animation: shake-no 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Shake animation from https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
+@keyframes shake-no {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+@keyframes shake-yes {
+
+    10%,
+    90% {
+        transform: translate3d(0, -1px, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(0, 2px, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(0, -4px, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(0, 4px, 0);
+    }
+}
 
 /*
  * Generic styles for all modals
@@ -274,6 +369,8 @@ body.modal-open {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: #fff url(/img/Unicorn_1.svg) left center/contain no-repeat;
+    /* Image from https://www.iconfinder.com/icons/2913106/animal_cartoon_fairytale_fantasy_horse_magic_unicorn_icon */
 }
 
 .modal-header {
@@ -330,7 +427,7 @@ body.modal-open {
     background-color: #D4AF37;
     border-bottom: 5px solid #C69400;
     text-shadow: 0px -2px #9B7400;
-}   
+}
 
 .button-modal:hover {
     background-color: #9B7400;
@@ -362,11 +459,6 @@ body.modal-open {
 .final-result>tr>td,
 .scoreboard-results>tr>td {
     padding: 0.625rem;
-}
-
-.scoreboard-results>tr:hover {
-    background: #e2ca7d;
-    border-radius: 10px;
 }
 
 .final-result>tr:hover>td:first-child,

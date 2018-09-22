@@ -62,30 +62,36 @@ const setLevel = level => {
 
 //  Cards images
 let cardsImages = [
-  'fa-anchor',
-  'fa-anchor',
-  'fa-bicycle',
-  'fa-bicycle',
-  'fa-bolt',
-  'fa-bolt',
-  'fa-bomb',
-  'fa-bomb',
-  'fa-cube',
-  'fa-cube',
+  'fa-crown',
+  'fa-crown',
+  'fa-heart',
+  'fa-heart',
   'fa-gem',
   'fa-gem',
+  'fa-sun',
+  'fa-sun',
   'fa-leaf',
   'fa-leaf',
-  'fa-paper-plane',
-  'fa-paper-plane',
-  'fa-balance-scale',
-  'fa-balance-scale',
-  'fa-beer',
-  'fa-beer',
+  'fa-moon',
+  'fa-moon',
+  'fa-paw',
+  'fa-paw',
+  'fa-frog',
+  'fa-frog',
+  'fa-bolt',
+  'fa-bolt',
+  'fa-gift',
+  'fa-gift',
+  'fa-bell',
+  'fa-bell',
+  'fa-cannabis',
+  'fa-cannabis',
+  'fa-bomb',
+  'fa-bomb',
   'fa-chess',
   'fa-chess',
-  'fa-futbol',
-  'fa-futbol'
+  'fa-anchor',
+  'fa-anchor'
 ];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -288,7 +294,6 @@ const showCards = () => {
 
 // Flip Cards on click
 const flipCards = card => {
-  card.classList.toggle('open');
   card.classList.toggle('show');
 };
 
@@ -309,7 +314,7 @@ const removeHint = () => {
 
 const giveHint = () => {
   if (hints >= 1) {
-    let unmatchedCards = Array.from(document.querySelectorAll('div.card:not(.match):not(.open)'));
+    let unmatchedCards = Array.from(document.querySelectorAll('div.card:not(.match):not(.show)'));
     let randomCard = unmatchedCards[Math.floor(Math.random() * unmatchedCards.length)];
     flipCards(randomCard);
     setTimeout(() => {
@@ -329,9 +334,13 @@ const matchCards = selectedCards => {
     openCards = [];
     cardsMatch();
   } else {
+    selectedCards[0].classList.toggle('no-match');
+    selectedCards[1].classList.toggle('no-match');
     setTimeout(() => {
       flipCards(selectedCards[0]);
       flipCards(selectedCards[1]);
+      selectedCards[0].classList.toggle('no-match');
+      selectedCards[1].classList.toggle('no-match');
       openCards = [];
     }, 1000);
     cardsDontMatch();
@@ -357,7 +366,9 @@ const cardsMatch = () => {
   }
   if (pairs === matched) {
     gameResult = 'Won';
-    gameWon();
+    setTimeout(() => {
+      gameWon();
+    }, 3000);
   }
 };
 
@@ -374,7 +385,9 @@ const cardsDontMatch = () => {
   }
   if (stars === 0) {
     gameResult = 'Lost';
-    gameOver();
+    setTimeout(() => {
+      gameOver();
+    }, 1000);
   }
 };
 
@@ -502,19 +515,6 @@ scoreboardCloseButton.addEventListener('click', e => {
     toggleResultModal();
     clickTarget.classList.remove('back-results');
   } else {
-    toggleScoreModal();
-  }
-});
-
-// Restart game button
-const restartGameButton = document.querySelector('.restart-button');
-restartGameButton.addEventListener('click', () => startGame(level));
-
-// Change level button
-const changeLevelButton = document.querySelector('.level-button');
-changeLevelButton.addEventListener('click', () => {
-  toggleWelcomeModal();
-});
     toggleScoreModal();
   }
 });
