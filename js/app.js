@@ -515,3 +515,23 @@ const changeLevelButton = document.querySelector('.level-button');
 changeLevelButton.addEventListener('click', () => {
   toggleWelcomeModal();
 });
+    toggleScoreModal();
+  }
+});
+
+// Restart game button
+const restartGameButton = document.querySelector('.restart-button');
+restartGameButton.addEventListener('click', () => startGame(level));
+
+// Change level button - main page
+const changeLevelButton = document.querySelector('.level-button');
+changeLevelButton.addEventListener('click', () => {
+  toggleWelcomeModal();
+});
+
+// Change level button - modal
+const changeLevelButtonModal = document.querySelector('.change-level');
+changeLevelButtonModal.addEventListener('click', () => {
+  toggleResultModal();
+  toggleWelcomeModal();
+});
