@@ -19,8 +19,14 @@ body {
 
 body {
     background: #ffffff url('../img/geometry2.png');
-    /* Background pattern from Subtle Patterns */
+    /* Background pattern from Free Vector Graphics by vecteezy.com */
     font-family: 'Pacifico', cursive;
+    color: #2e3d49;
+    background-image: url(/img/Rainbow.svg);
+    background-size: cover;
+    background-position: top center;
+    background-position-x: center;
+    background-position-y: top;
 }
 
 .container {
@@ -44,8 +50,8 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     color: white;
+    text-shadow: 0px -2px #000;
 }
 
 .navbar-hamburger {
@@ -79,33 +85,8 @@ body {
     padding-left: 4px;
 }
 
-.navbar-button:hover>i.fa-redo,
-.navbar-button:hover>i.fa-cog {
-    animation: fa-spin 2s 1;
-}
-
-.navbar-button:hover>i.fa-crown {
-    animation: golden 2s 1;
-}
-
-@keyframes golden {
-    0% {
-        color: #fff;
-    }
-
-    100% {
-        color: #ffbf00;
-    }
-}
-
-@keyframes fa-spin {
-    0% {
-        transform: rotate(0deg)
-    }
-
-    to {
-        transform: rotate(1turn)
-    }
+.navbar-button:hover {
+    color: #ffbf00;
 }
 
 /* STARS AND HINTS */
@@ -114,8 +95,9 @@ body {
     max-width: 1200px;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 3rem 1rem;
+    padding: 0.5rem 3rem 0.5rem;
     margin: 0 auto;
+    text-shadow: 1px 1px #000;
 }
 
 .hints-wrapper,
@@ -142,7 +124,14 @@ body {
 
 .lost,
 .used {
+    animation: grey-out 0.3s linear 2 alternate;
     color: #808080;
+}
+
+@keyframes grey-out {
+    to {
+        color: #ffbf00;
+    }
 }
 
 @media only screen and (max-width: 800px) {
@@ -189,11 +178,11 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(160deg, #f1bd6a 0%, #38abfa 100%);
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     border-radius: 10px;
     margin: 0 auto;
-    padding: 0;
+    padding: 1rem 0;
 }
 
 .deck .card-wrapper {
@@ -204,7 +193,7 @@ body {
 
 .deck .card {
     display: flex;
-    margin: 20px;
+    margin: 0.625rem;
     align-items: center;
     justify-content: center;
     height: 125px;
@@ -215,6 +204,10 @@ body {
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card:hover {
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5)
 }
 
 .deck .card.open {
@@ -254,26 +247,6 @@ body {
  * Generic styles for all modals
  */
 
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 .modal {
     position: fixed;
     top: 0;
@@ -285,8 +258,6 @@ body {
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
 }
 
 /* hide scrollbar when modal is open */
@@ -297,8 +268,8 @@ body.modal-open {
 .modal-content {
     position: relative;
     background-color: #fff;
-    border-radius: 4px;
-    padding: 40px;
+    border-radius: 0.625rem;
+    padding: 2.5rem;
     max-width: 800px;
     top: 50%;
     left: 50%;
@@ -308,11 +279,12 @@ body.modal-open {
 .modal-header {
     text-align: center;
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .modal-description {
     text-align: center;
+    margin-bottom: 1.25rem;
 }
 
 .modal-buttons-wrapper {
@@ -325,10 +297,10 @@ body.modal-open {
 .button-modal {
     position: relative;
     padding: 0.5rem 2rem;
-    margin: 0px 0.625rem 0.625rem 0px;
+    margin: 0px 1.25rem 0 0px;
     float: left;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     font-family: 'Pacifico', cursive;
     font-size: 1rem;
     color: #FFF;
@@ -336,39 +308,15 @@ body.modal-open {
     transition: all 0.1s;
     -webkit-transition: all 0.1s;
     cursor: pointer;
-}
+    background-color: #D4AF37;
+    border-bottom: 5px solid #C69400;
+    text-shadow: 0px -2px #9B7400;
+}   
 
-.hard {
-    background-color: #E74C3C;
-    border-bottom: 5px solid #BD3E31;
-    text-shadow: 0px -2px #BD3E31;
-}
-
-.hard:hover {
-    background-color: #BD3E31;
-    border-bottom: 5px solid #66221b;
-}
-
-.medium {
-    background-color: #F2CF66;
-    border-bottom: 5px solid #D1B358;
-    text-shadow: 0px -2px #D1B358;
-}
-
-.medium:hover {
-    background-color: #D1B358;
-    border-bottom: 5px solid #87743a;
-}
-
-.easy {
-    background-color: #82BF56;
-    border-bottom: 5px solid #669644;
-    text-shadow: 0px -2px #669644;
-}
-
-.easy:hover {
-    background-color:  #669644;
-    border-bottom: 5px solid #41602b;
+.button-modal:hover {
+    background-color: #9B7400;
+    border-bottom: 5px solid #775900;
+    text-shadow: 0px -2px #4C3900;
 }
 
 .button-modal:active,
@@ -389,7 +337,7 @@ body.modal-open {
 }
 
 .scoreboard-header>th {
-    padding: 0 0.625rem;
+    padding: 0.625rem;
 }
 
 .final-result>tr>td,
@@ -397,9 +345,8 @@ body.modal-open {
     padding: 0.625rem;
 }
 
-.final-result>tr:hover,
 .scoreboard-results>tr:hover {
-    background: #dddddd;
+    background: #e2ca7d;
     border-radius: 10px;
 }
 
@@ -414,7 +361,6 @@ body.modal-open {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-
 
 /* 
 * Prevent clicks when cards are displayed for 5 seconds
