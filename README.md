@@ -6,6 +6,7 @@
 * [How to play](#howtoplay)
 * [Screenshots](#screenshots)
 * [Tools & Dependencies](#tools)
+* [Compatibility](#compatibility)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -52,6 +53,10 @@ This game was built with vanilla Javascript (ES6), HTML, CSS.
 * Background pattern was taken from [Free Vector Graphics by vecteezy.com](https://www.vecteezy.com/)
 
 * Unicorn image was taken from [IconFinder.com](https://www.iconfinder.com/icons/2913106/animal_cartoon_fairytale_fantasy_horse_magic_unicorn_icon)
+
+## Compatibility
+
+Game was tested on modern browsers (Firefox, Chrome, Edge). Internet Explorer 11 is not supported.
 
 ## Contributing
 
