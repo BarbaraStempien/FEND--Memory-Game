@@ -35,7 +35,7 @@ The scoreboard allows the player to see statistics of the last 5 games.
 
 ## How to play 🕹
 
-Clone this repository and open index.html or play on GitHub.io: 
+Clone this repository and open index.html or play on GitHub.io: https://barbarastempien.github.io/FEND--Memory-Game/
 
 ## Screenshots
 ![alt text](/screenshots/WelcomePage.png "Start page")
