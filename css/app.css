@@ -49,7 +49,7 @@ body {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 /* STATISTICS AND SETTINGS PANEL */
@@ -487,16 +487,14 @@ body {
  */
 
 .modal {
+    display: block;
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
     background-color: rgba(0, 0, 0, 0.88);
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+    overflow-y: scroll;
 }
 
 /* hide scrollbar when modal is open */
@@ -505,16 +503,18 @@ body.modal-open {
 }
 
 .modal-content {
-    position: relative;
-    background-color: #fff;
-    border-radius: 0.625rem;
-    padding: 2.5rem;
     max-width: 800px;
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 0.625rem;
+    position: relative;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    max-height: 550px;
+    overflow-y: auto;
     background: #fff url(/img/Unicorn_1.svg) left center/contain no-repeat;
     /* Image from https://www.iconfinder.com/icons/2913106/animal_cartoon_fairytale_fantasy_horse_magic_unicorn_icon */
 }
