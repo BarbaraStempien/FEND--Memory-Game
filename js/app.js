@@ -366,7 +366,7 @@ const cardsMatch = () => {
     gameResult = 'Won';
     setTimeout(() => {
       gameWon();
-    }, 3000);
+    }, 2000);
   }
 };
 
