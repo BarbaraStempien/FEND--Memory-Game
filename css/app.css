@@ -20,7 +20,9 @@ body {
 }
 
 body {
-    background-image: url(/img/Rainbow.svg);
+    /* background-image: url(/img/Rainbow.svg); */
+    background-image: url('https://cdn.rawgit.com/BarbaraStempien/FEND--Memory-Game/master/img/Rainbow.svg');
+    /* Addressing a SVG related bug in GitHub Pages */
     /* Background pattern from Free Vector Graphics by vecteezy.com */
     font-family: 'Pacifico', cursive;
     color: #2e3d49;
@@ -515,7 +517,9 @@ body.modal-open {
     transform: translate(-50%, -50%);
     max-height: 550px;
     overflow-y: auto;
-    background: #fff url(/img/Unicorn_1.svg) left center/contain no-repeat;
+    /* background: #fff url(/img/Unicorn_1.svg) left center/contain no-repeat; */
+    background: #fff url('https://cdn.rawgit.com/BarbaraStempien/FEND--Memory-Game/master/img/Unicorn_1.svg') left center/contain no-repeat;
+    /* Addressing a SVG related bug in GitHub Pages */
     /* Image from https://www.iconfinder.com/icons/2913106/animal_cartoon_fairytale_fantasy_horse_magic_unicorn_icon */
 }
 
